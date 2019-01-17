@@ -164,11 +164,11 @@ EZInput.prototype.render = function (indent = 0) {
     input1.id(this.id());
   
   /** If min is set, add attribute */
-  if ( this.min().length > 0 )
+  if ( this.min() > 0 )
     input1.min(this.min());
   
   /** If max is set, add attribute */
-  if ( this.max().length > 0 )
+  if ( this.max() > 0 )
     input1.max(this.max());
   
   /** If name is set, add attribute */
