@@ -1,0 +1,21 @@
+{
+  "name": "ezforms",
+  "version": "0.1.3",
+  "description": "Easy HTML Form Rendering Using Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint index.js elements/button.js elements/container-element.js elements/div.js elements/element.js elements/heading.js elements/index.js elements/input.js elements/label.js elements/option.js elements/select.js"
+  },
+  "keywords": [
+    "UI",
+    "UX",
+    "Interface",
+    "Front",
+    "End",
+  ],
+  "author": "Rich Lowe",
+  "license": "MIT",
+  "dependencies": {
+    "ezobjects": "^5.4.4"
+  }
+}
