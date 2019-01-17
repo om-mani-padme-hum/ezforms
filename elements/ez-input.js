@@ -17,8 +17,8 @@ const configEZInput = {
     { name: `labelClasses`, type: `array`, arrayOf: { type: `string` } },
     { name: `label`, type: `string` },
     { name: `id`, type: `string` },
-    { name: `min`, type: `float` },
-    { name: `max`, type: `float` },
+    { name: `min`, type: `float`, default: -1 },
+    { name: `max`, type: `float`, default: -1 },
     { name: `name`, type: `string` },
     { name: `required`, type: `boolean` },
     { name: `type`, type: `string` },
@@ -164,11 +164,11 @@ EZInput.prototype.render = function (indent = 0) {
     input1.id(this.id());
   
   /** If min is set, add attribute */
-  if ( this.min() > 0 )
+  if ( this.min() >= 0 )
     input1.min(this.min());
   
   /** If max is set, add attribute */
-  if ( this.max() > 0 )
+  if ( this.max() >= 0 )
     input1.max(this.max());
   
   /** If name is set, add attribute */
