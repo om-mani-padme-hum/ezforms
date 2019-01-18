@@ -1,31 +1,37 @@
 /** Require external modules */
+const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
-
-/** Require local modules */
-const div = require(`./div`);
-const button = require(`./button`);
 
 /** Configure EZButton class */
 const configEZButton = {
   className: `EZButton`,
-  properties: [    
-    { name: `cols`, type: `int`, default: 16 },
-    { name: `divClasses`, type: `array`, arrayOf: { type: `string` } },
+  properties: [
+    { name: `autofocus`, type: `boolean` },
     { name: `buttonClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `cols`, type: `int`, default: 16 },
+    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `disabled`, type: `boolean` },
+    { name: `form`, type: `string` },
+    { name: `formaction`, type: `string` },
+    { name: `formenctype`, type: `string` },
+    { name: `formmethod`, type: `string` },
+    { name: `formnovalidate`, type: `boolean` },
+    { name: `formtarget`, type: `string` },
+    { name: `id`, type: `string` },
+    { name: `name`, type: `string` },
     { name: `text`, type: `string` },
-    { name: `type`, type: `string`, default: `submit` },
-    { name: `id`, type: `string` }
+    { name: `type`, type: `string`, default: `submit` }
   ]
 };
 
 /** Create EZButton class */
 ezobjects.createClass(configEZButton);
 
-/** Create method for adding class to div classes array */
-EZButton.prototype.addDivClass = function (className) {
-  /** If the class doesn't already exist in the div classes array, add it */
-  if ( !this.divClasses().includes(className) )
-    this.divClasses().push(className);
+/** Create method for adding class to column div classes array */
+EZButton.prototype.addColumnDivClass = function (className) {
+  /** If the class doesn`t already exist in the column div classes array, add it */
+  if ( !this.columnDivClasses().includes(className) )
+    this.columnDivClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
@@ -33,7 +39,7 @@ EZButton.prototype.addDivClass = function (className) {
 
 /** Create method for adding class to button classes array */
 EZButton.prototype.addButtonClass = function (className) {
-  /** If the class doesn't already exist in the button classes array, add it */
+  /** If the class doesn`t already exist in the button classes array, add it */
   if ( !this.buttonClasses().includes(className) )
     this.buttonClasses().push(className);
   
@@ -41,14 +47,14 @@ EZButton.prototype.addButtonClass = function (className) {
   return this;
 };
 
-/** Create method for removing class from div classes array */
-EZButton.prototype.removeDivClass = function (className) {
-  /** Find index of class in div classes array (if it exists) */
-  const index = this.divClasses().findIndex(x => x == className);
+/** Create method for removing class from column div classes array */
+EZButton.prototype.removeColumnDivClass = function (className) {
+  /** Find index of class in column div classes array (if it exists) */
+  const index = this.columnDivClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from div classes array */
+  /** If index exists, remove class from column div classes array */
   if ( index !== -1 )
-    this.divClasses(this.divClasses().splice(index, 1));
+    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
@@ -77,39 +83,41 @@ EZButton.prototype.render = function (indent = 0) {
   if ( this.text().length == 0 )
     throw new ReferenceError(`EZButton.render(): Invalid button text, must not be blank.`);
   
-  /** Create div element */
-  const div1 = new div.Div();
+  /** Create column div */
+  const columnDiv = new ezhtml.Div();
   
-  /** Set required cols class on div */
-  div1.addClass(`col-${this.cols()}`);
+  /** Set required cols class on column div */
+  columnDiv.addClass(`col-${this.cols()}`);
   
-  /** If there are div classes to include, add them to div */
-  if ( this.divClasses().length > 0 )
-    this.divClasses().map(x => div1.addClass(x));
-  
+  /** Transfer column div classes to column div */
+  this.columnDivClasses().map(x => columnDiv.addClass(x));
+
   /** Create button element */
-  const button1 = new button.Button();
+  const button = new ezhtml.Button();
   
-  /** If there are button classes to include, add them to button */
-  if ( this.buttonClasses().length > 0 )
-    this.buttonClasses().map(x => button1.addClass(x));
+  /** Transfer button classes to button */
+  this.buttonClasses().map(x => button.addClass(x));
   
-  /** If id is set, transfer to button element */
-  if ( this.id().length > 0 )
-    button1.id(this.id());
+  /** Transfer button properties to button */
+  button.autofocus(this.autofocus());
+  button.disabled(this.disabled());
+  button.form(this.form());
+  button.formaction(this.formaction());
+  button.formenctype(this.formenctype());
+  button.formmethod(this.formmethod());
+  button.formnovalidate(this.formnovalidate());
+  button.formtarget(this.formtarget());
+  button.id(this.id());
+  button.name(this.name());
+  button.text(this.text());
+  button.type(this.type());
+  button.value(this.value());
   
-  /** If type is set, transfer to button element */
-  if ( this.type().length > 0 )
-    button1.type(this.type());
-  
-  /** Transfer text to button element */
-  button1.text(this.text());
-  
-  /** Append input to div contents */
-  div1.contents().push(button1);
+  /** Append button to column div */
+  columnDiv.append(button);
   
   /** Return markup */
-  return div1.render(indent);
+  return columnDiv.render(indent);
 };
 
 /** Export class from module */

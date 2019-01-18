@@ -1,4 +1,5 @@
 /** Require external modules */
+const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
 /** Require local modules */
@@ -7,12 +8,17 @@ const elements = require(`./elements`);
 /** Configure class */
 const configForm = {
   className: `Form`,
-  extends: elements.ContainerElement,
+  extends: ezhtml.ContainerElement,
   properties: [
-    { name: `action`, type: `string` },
-    { name: `enctype`, type: `string` },
+    { name: 'acceptCharset', type: 'string' },
+    { name: 'action', type: 'string' },
+    { name: 'autocomplete', type: 'string' },
+    { name: 'enctype', type: 'string' },
     { name: `id`, type: `string` },
-    { name: `method`, type: `string` }
+    { name: 'method', type: 'string' },
+    { name: 'name', type: 'string' },
+    { name: 'novalidate', type: 'boolean' },
+    { name: 'target', type: 'string' }
   ]
 };
 
@@ -24,7 +30,7 @@ Form.prototype.button = function () {
   const button = new elements.EZButton();
   
   /** Add button to form */
-  this.contents().push(button);
+  this.append(button);
   
   /** Return button for call chaining */
   return button;
@@ -35,7 +41,7 @@ Form.prototype.checkboxes = function () {
   const checkboxes = new elements.EZCheckboxGroup();
   
   /** Add input group to form */
-  this.contents().push(checkboxes);
+  this.append(checkboxes);
   
   /** Return input group for call chaining */
   return checkboxes;
@@ -49,7 +55,7 @@ Form.prototype.color = function () {
   input.type(`color`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -63,7 +69,7 @@ Form.prototype.date = function () {
   input.type(`date`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -77,7 +83,7 @@ Form.prototype.datetime = function () {
   input.type(`datetime-local`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -91,7 +97,7 @@ Form.prototype.email = function () {
   input.type(`email`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -105,7 +111,7 @@ Form.prototype.file = function () {
   input.type(`file`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -116,7 +122,7 @@ Form.prototype.heading = function () {
   const heading = new elements.Heading();
     
   /** Add heading to form */
-  this.contents().push(heading);
+  this.append(heading);
   
   /** Return heading for call chaining */
   return heading;
@@ -130,7 +136,7 @@ Form.prototype.month = function () {
   input.type(`month`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -144,7 +150,7 @@ Form.prototype.multiselect = function () {
   select.multiple(true);
   
   /** Add select to form */
-  this.contents().push(select);
+  this.append(select);
   
   /** Return select for call chaining */
   return select;
@@ -158,7 +164,7 @@ Form.prototype.number = function () {
   input.type(`number`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -197,7 +203,7 @@ Form.prototype.password = function () {
   input.type(`password`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -208,7 +214,7 @@ Form.prototype.radios = function () {
   const radios = new elements.EZRadioGroup();
   
   /** Add input group to form */
-  this.contents().push(radios);
+  this.append(radios);
   
   /** Return input group for call chaining */
   return radios;
@@ -222,7 +228,7 @@ Form.prototype.range = function () {
   input.type(`range`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -233,7 +239,7 @@ Form.prototype.select = function () {
   const select = new elements.EZSelect();
   
   /** Add select to form */
-  this.contents().push(select);
+  this.append(select);
   
   /** Return select for call chaining */
   return select;
@@ -244,7 +250,7 @@ Form.prototype.space = function () {
   const space = new elements.Space();
   
   /** Add space to form */
-  this.contents().push(space);
+  this.append(space);
   
   /** Return space for call chaining */
   return space;
@@ -255,7 +261,7 @@ Form.prototype.textarea = function () {
   const textArea = new elements.EZTextArea();
   
   /** Add text area to form */
-  this.contents().push(textArea);
+  this.append(textArea);
   
   /** Return text area for call chaining */
   return textArea;
@@ -269,7 +275,7 @@ Form.prototype.text = function () {
   input.type(`text`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -283,7 +289,7 @@ Form.prototype.time = function () {
   input.type(`time`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -297,7 +303,7 @@ Form.prototype.url = function () {
   input.type(`url`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -311,7 +317,7 @@ Form.prototype.week = function () {
   input.type(`week`);
   
   /** Add input to form */
-  this.contents().push(input);
+  this.append(input);
   
   /** Return input for call chaining */
   return input;
@@ -319,27 +325,22 @@ Form.prototype.week = function () {
 
 /** Create method for rendering element */
 Form.prototype.render = function (indent = 0) {
-  /** Set tag */
-  this.tag(`form`);
-  
-  /** If action is set, add attribute */
-  if ( this.action().length > 0 )
-    this.addAttribute(`action`, this.action());
-  
-  /** If enctype is set, add attribute */
-  if ( this.enctype().length > 0 )
-    this.addAttribute(`enctype`, this.enctype());
-  
-  /** If id is set, add attribute */
-  if ( this.id().length > 0 )
-    this.addAttribute(`id`, this.id());
-  
-  /** If method is set, add attribute */
-  if ( this.method().length > 0 )
-    this.addAttribute(`method`, this.method());
+  /** Create form */
+  const form = new ezhtml.Form();
+
+  /** Transfer form properties */
+  form.acceptCharset(this.acceptCharset());
+  form.action(this.action());
+  form.autocomplete(this.autocomplete());
+  form.enctype(this.enctype());
+  form.id(this.id());
+  form.method(this.method());
+  form.name(this.name());
+  form.novalidate(this.novalidate());
+  form.target(this.target());
   
   /** Return markup */
-  return elements.ContainerElement.prototype.render.call(this, indent);
+  return form.render(indent);
 };
 
 /** Export class from module */

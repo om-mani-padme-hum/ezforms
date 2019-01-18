@@ -134,50 +134,10 @@ option {
   margin-bottom: 1px;
 }
 
-%select-multiple {
+select[multiple] {
   font-size: 15px;
-  -webkit-appearance:none;
+  -webkit-appearance: none;
   background: rgb(255, 255, 255);
-}
-
-select[multiple].show1 {
-  @extend %select-multiple;
-  height: 20px;
-}
-
-select[multiple].show2 {
-  @extend %select-multiple;
-  height: 40px;
-}
-
-select[multiple].show3 {
-  @extend %select-multiple;
-  height: 60px;
-}
-
-select[multiple].show4 {
-  @extend %select-multiple;
-  height: 80px;
-}
-
-select[multiple].show5 {
-  @extend %select-multiple;
-  height: 100px;
-}
-
-select[multiple].show6 {
-  @extend %select-multiple;
-  height: 120px;
-}
-
-select[multiple].show7 {
-  @extend %select-multiple;
-  height: 140px;
-}
-
-select[multiple].show8 {
-  @extend %select-multiple;
-  height: 160px;
 }
 
 %input {

@@ -1,48 +1,68 @@
 /** Require external modules */
+const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
-
-/** Require local modules */
-const div = require(`./div`);
-const input = require(`./input`);
-const label = require(`./label`);
 
 /** Configure EZInput class */
 const configEZInput = {
   className: `EZInput`,
-  properties: [    
+  properties: [
+    { name: `accept`, type: `string` },
+    { name: `alt`, type: `string` },
+    { name: `autocomplete`, type: `string` },
+    { name: `autofocus`, type: `boolean` },
+    { name: `checked`, type: `boolean` },
     { name: `cols`, type: `int`, default: 16 },
-    { name: `divClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `inputClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `inputAttributes`, type: `array`, arrayOf: { type: `string` } },
-    { name: `labelClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `label`, type: `string` },
+    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `dirname`, type: `string` },
+    { name: `disabled`, type: `boolean` },
+    { name: `form`, type: `string` },
+    { name: `formaction`, type: `string` },
+    { name: `formenctype`, type: `string` },
+    { name: `formmethod`, type: `string` },
+    { name: `formnovalidate`, type: `boolean` },
+    { name: `formtarget`, type: `string` },
+    { name: `height`, type: `string` },
     { name: `id`, type: `string` },
-    { name: `min`, type: `float`, default: -1 },
-    { name: `max`, type: `float`, default: -1 },
+    { name: `inputClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `inputLabelClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `label`, type: `string` },
+    { name: `list`, type: `string` },
+    { name: `max`, type: `string` },
+    { name: `maxlength`, type: `string` },
+    { name: `min`, type: `string` },
+    { name: `multiple`, type: `boolean` },
     { name: `name`, type: `string` },
+    { name: `pattern`, type: `string` },
+    { name: `placeholder`, type: `string` },
+    { name: `readonly`, type: `boolean` },
     { name: `required`, type: `boolean` },
-    { name: `type`, type: `string` },
-    { name: `value`, type: `string` }
+    { name: `size`, type: `int` },
+    { name: `src`, type: `string` },
+    { name: `step`, type: `string` },
+    { name: `type`, type: `string`, default: `text` },
+    { name: `value`, type: `string` },
+    { name: `width`, type: `string` }
   ]
 };
 
 /** Create EZInput class */
 ezobjects.createClass(configEZInput);
 
-/** Create method for adding class to div classes array */
-EZInput.prototype.addDivClass = function (className) {
-  /** If the class doesn't already exist in the div classes array, add it */
-  if ( !this.divClasses().includes(className) )
-    this.divClasses().push(className);
+/** Create method for adding class to column div classes array */
+EZInput.prototype.addColumnDivClass = function (className) {
+  /** If the class doesn`t already exist in the column div classes array, add it */
+  if ( !this.columnDivClasses().includes(className) )
+    this.columnDivClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for adding attribute to input attributes object */
-EZInput.prototype.addInputAttribute = function (name, value) {
-  /** Set the attribute */
-  this.inputAttributes[name] = value;
+/** Create method for adding class to label classes array */
+EZInput.prototype.addInputLabelClass = function (className) {
+  /** If the class doesn`t already exist in the label classes array, add it */
+  if ( !this.inputLabelClasses().includes(className) )
+    this.inputLabelClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
@@ -50,7 +70,7 @@ EZInput.prototype.addInputAttribute = function (name, value) {
 
 /** Create method for adding class to input classes array */
 EZInput.prototype.addInputClass = function (className) {
-  /** If the class doesn't already exist in the input classes array, add it */
+  /** If the class doesn`t already exist in the input classes array, add it */
   if ( !this.inputClasses().includes(className) )
     this.inputClasses().push(className);
   
@@ -58,33 +78,14 @@ EZInput.prototype.addInputClass = function (className) {
   return this;
 };
 
-/** Create method for adding class to label classes array */
-EZInput.prototype.addLabelClass = function (className) {
-  /** If the class doesn't already exist in the label classes array, add it */
-  if ( !this.labelClasses().includes(className) )
-    this.labelClasses().push(className);
+/** Create method for removing class from column div classes array */
+EZInput.prototype.removeColumnDivClass = function (className) {
+  /** Find index of class in column div classes array (if it exists) */
+  const index = this.columnDivClasses().findIndex(x => x == className);
   
-  /** Return this class for call chaining */
-  return this;
-};
-
-/** Create method for removing class from div classes array */
-EZInput.prototype.removeDivClass = function (className) {
-  /** Find index of class in div classes array (if it exists) */
-  const index = this.divClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from div classes array */
+  /** If index exists, remove class from column div classes array */
   if ( index !== -1 )
-    this.divClasses(this.divClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
-  return this;
-};
-
-/** Create method for removing attribute from input attributes object */
-EZInput.prototype.removeInputAttribute = function (name) {
-  /** Delete the attribute */
-  delete this.inputAttributes[name];
+    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
@@ -103,14 +104,14 @@ EZInput.prototype.removeInputClass = function (className) {
   return this;
 };
 
-/** Create method for removing class from label classes array */
-EZInput.prototype.removeLabelClass = function (className) {
-  /** Find index of class in label classes array (if it exists) */
-  const index = this.labelClasses().findIndex(x => x == className);
+/** Create method for removing class from input label classes array */
+EZInput.prototype.removeInputLabelClass = function (className) {
+  /** Find index of class in input label classes array (if it exists) */
+  const index = this.inputLabelClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from label classes array */
+  /** If index exists, remove class from input label classes array */
   if ( index !== -1 )
-    this.labelClasses(this.labelClasses().splice(index, 1));
+    this.inputLabelClasses(this.inputLabelClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
@@ -122,78 +123,71 @@ EZInput.prototype.render = function (indent = 0) {
   if ( this.cols() < 1 || this.cols() > 16 )
     throw new RangeError(`EZInput.render(): Invalid number, cols must be between 1 and 16 inclusive.`);
   
-  /** Create div element */
-  const div1 = new div.Div();
+  /** Create column div */
+  const columnDiv = new ezhtml.Div();
   
-  /** Set required cols class on div */
-  div1.addClass(`col-${this.cols()}`);
+  /** Set required cols class on column div */
+  columnDiv.addClass(`col-${this.cols()}`);
   
-  /** If there are div classes to include, add them to div */
-  if ( this.divClasses().length > 0 )
-    this.divClasses().map(x => div1.addClass(x));
+  /** Transfer column div classes to column div */
+  this.columnDivClasses().map(x => columnDiv.addClass(x));
   
   /** Create label element */
-  const label1 = new label.Label();
+  const inputLabel = new label.Label();
   
-  /** If there are label classes to include, add them to label */
-  if ( this.labelClasses().length > 0 )
-    this.labelClasses().map(x => label1.addClass(x));
+  /** Transfer input label classes to input label */
+  this.inputLabelClasses().map(x => inputLabel.addClass(x));
 
-  /** Set label text */
-  label1.text(this.label());
+  /** Set input label text */
+  inputLabel.text(this.label());
 
   /** Append label to div contents */
-  div1.contents().push(label1);
+  columnDiv.append(inputLabel);
   
-  /** Create input element */
-  const input1 = new input.Input();
+  /** Create input */
+  const input = new input.Input();
   
-  /** If there are input attributes to include, append them */
-  if ( Object.keys(this.inputAttributes()).length > 0 ) {
-    Object.keys(this.inputAttributes()).forEach((key) => {
-      input1.addAttribute(key, this.inputAttributes()[key]);
-    });
-  }
+  /** Transfer input classes to input */
+  this.inputClasses().map(x => input.addClass(x));
   
-  /** If there are input classes to include, add them to input */
-  if ( this.inputClasses().length > 0 )
-    this.inputClasses().map(x => input1.addClass(x));
-  
-  /** If id is set, add attribute */
-  if ( this.id().length > 0 )
-    input1.id(this.id());
-  
-  /** If min is set, add attribute */
-  if ( this.min() >= 0 )
-    input1.min(this.min());
-  
-  /** If max is set, add attribute */
-  if ( this.max() >= 0 )
-    input1.max(this.max());
-  
-  /** If name is set, add attribute */
-  if ( this.name().length > 0 )
-    input1.name(this.name());
-  
-  /** If name is set, add attribute */
-  if ( this.value().length > 0 )
-    input1.value(this.value());
-  
-  /** If required is set, transfer to input element */
-  if ( this.required() )
-    input1.required(true);
-  
-  if ( this.type().length == 0 )
-    throw new SyntaxError(`EZInput.render(): Input type not set, set this using the type() setter on the input.`);
-  
-  /** Set input type */
-  input1.type(this.type());
-  
-  /** Append input to div contents */
-  div1.contents().push(input1);
+  /** Transfer input properties */
+  input.accept(this.accept());
+  input.alt(this.alt());
+  input.autocomplete(this.autocomplete());
+  input.autofocus(this.autofocus());
+  input.checked(option.selected());
+  input.dirname(this.dirname());
+  input.disabled(this.disabled());
+  input.form(this.form());
+  input.formaction(this.formaction());
+  input.formenctype(this.formenctype());
+  input.formmethod(this.formmethod());
+  input.formnovalidate(this.formnovalidate());
+  input.formtarget(this.formtarget());
+  input.height(this.height());
+  input.id(this.id());
+  input.list(this.list());
+  input.max(this.max());
+  input.maxlength(this.maxlength());
+  input.min(this.min());
+  input.multiple(this.multiple());
+  input.name(this.name());
+  input.pattern(this.pattern());
+  input.placeholder(this.placeholder());
+  input.readonly(this.readonly());
+  input.required(this.required());
+  input.size(this.size());
+  input.src(this.src());
+  input.step(this.step());
+  input.type(this.type());
+  input.value(this.value());
+  input.width(this.width());
+
+  /** Append input to column div */
+  columnDiv.append(input);
   
   /** Return markup */
-  return div1.render(indent);
+  return columnDiv.render(indent);
 };
 
 /** Export class from module */

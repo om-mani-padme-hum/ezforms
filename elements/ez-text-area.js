@@ -1,94 +1,98 @@
 /** Require external modules */
+const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
-
-/** Require local modules */
-const div = require(`./div`);
-const label = require(`./label`);
-const textArea = require(`./text-area`);
 
 /** Configure EZTextArea class */
 const configEZTextArea = {
   className: `EZTextArea`,
-  properties: [    
+  properties: [
+    { name: `autofocus`, type: `boolean` },
     { name: `cols`, type: `int`, default: 16 },
-    { name: `divClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `labelClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `textAreaClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `label`, type: `string` },
+    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `dirname`, type: `string` },
+    { name: `disabled`, type: `boolean` },
+    { name: `form`, type: `string` },
     { name: `id`, type: `string` },
+    { name: `inputClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `inputLabelClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `label`, type: `string` },
+    { name: `maxlength`, type: `int` },
     { name: `name`, type: `string` },
+    { name: `placeholder`, type: `string` },
+    { name: `readonly`, type: `boolean` },
     { name: `required`, type: `boolean` },
-    { name: `rows`, type: `int` }
+    { name: `rows`, type: `int` },
+    { name: `wrap`, type: `string` }
   ]
 };
 
 /** Create EZTextArea class */
 ezobjects.createClass(configEZTextArea);
 
-/** Create method for adding class to div classes array */
-EZTextArea.prototype.addDivClass = function (className) {
-  /** If the class doesn't already exist in the div classes array, add it */
-  if ( !this.divClasses().includes(className) )
-    this.divClasses().push(className);
+/** Create method for adding class to column div classes array */
+EZButton.prototype.addColumnDivClass = function (className) {
+  /** If the class doesn`t already exist in the column div classes array, add it */
+  if ( !this.columnDivClasses().includes(className) )
+    this.columnDivClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for adding class to textArea classes array */
-EZTextArea.prototype.addTextAreaClass = function (className) {
-  /** If the class doesn't already exist in the textArea classes array, add it */
-  if ( !this.textAreaClasses().includes(className) )
-    this.textAreaClasses().push(className);
+/** Create method for adding class to input classes array */
+EZCheckboxGroup.prototype.addInputClass = function (className) {
+  /** If the class doesn`t already exist in the input classes array, add it */
+  if ( !this.inputClasses().includes(className) )
+    this.inputClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for adding class to label classes array */
-EZTextArea.prototype.addLabelClass = function (className) {
-  /** If the class doesn't already exist in the label classes array, add it */
-  if ( !this.labelClasses().includes(className) )
-    this.labelClasses().push(className);
+/** Create method for adding class to input label classes array */
+EZCheckboxGroup.prototype.addInputLabelClass = function (className) {
+  /** If the class doesn`t already exist in the input label classes array, add it */
+  if ( !this.inputLabelClasses().includes(className) )
+    this.inputLabelClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for removing class from div classes array */
-EZTextArea.prototype.removeDivClass = function (className) {
-  /** Find index of class in div classes array (if it exists) */
-  const index = this.divClasses().findIndex(x => x == className);
+/** Create method for removing class from column div classes array */
+EZButton.prototype.removeColumnDivClass = function (className) {
+  /** Find index of class in column div classes array (if it exists) */
+  const index = this.columnDivClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from div classes array */
+  /** If index exists, remove class from column div classes array */
   if ( index !== -1 )
-    this.divClasses(this.divClasses().splice(index, 1));
+    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for removing class from textArea classes array */
-EZTextArea.prototype.removeTextAreaClass = function (className) {
-  /** Find index of class in textArea classes array (if it exists) */
-  const index = this.textAreaClasses().findIndex(x => x == className);
+/** Create method for removing class from input classes array */
+EZCheckboxGroup.prototype.removeInputClass = function (className) {
+  /** Find index of class in input classes array (if it exists) */
+  const index = this.inputClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from textArea classes array */
+  /** If index exists, remove class from input classes array */
   if ( index !== -1 )
-    this.textAreaClasses(this.textAreaClasses().splice(index, 1));
+    this.inputClasses(this.inputClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for removing class from label classes array */
-EZTextArea.prototype.removeLabelClass = function (className) {
-  /** Find index of class in label classes array (if it exists) */
-  const index = this.labelClasses().findIndex(x => x == className);
+/** Create method for removing class from input label classes array */
+EZCheckboxGroup.prototype.removeInputLabelClass = function (className) {
+  /** Find index of class in input label classes array (if it exists) */
+  const index = this.inputLabelClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from label classes array */
+  /** If index exists, remove class from input label classes array */
   if ( index !== -1 )
-    this.labelClasses(this.labelClasses().splice(index, 1));
+    this.inputLabelClasses(this.inputLabelClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
@@ -100,56 +104,51 @@ EZTextArea.prototype.render = function (indent = 0) {
   if ( this.cols() < 1 || this.cols() > 16 )
     throw new RangeError(`EZTextArea.render(): Invalid number, cols must be between 1 and 16 inclusive.`);
   
-  /** Create div element */
-  const div1 = new div.Div();
+  /** Create column div */
+  const columnDiv = new ezhtml.Div();
   
-  /** Set required cols class on div */
-  div1.addClass(`col-${this.cols()}`);
+  /** Set required cols class on column div */
+  columnDiv.addClass(`col-${this.cols()}`);
   
-  /** If there are div classes to include, add them to div */
-  if ( this.divClasses().length > 0 )
-    this.divClasses().map(x => ddiv1iv.addClass(x));
+  /** Transfer column div classes to column div */
+  this.columnDivClasses().map(x => columnDiv.addClass(x));
   
   /** Create label element */
-  const label1 = new label.Label();
+  const inputLabel = new ezhtml.Label();
   
-  /** If there are label classes to include, add them to label */
-  if ( this.labelClasses().length > 0 )
-    this.labelClasses().map(x => label1.addClass(x));
+  /** Transfer input label classes to input label */
+  this.inputLabelClasses().map(x => inputLabel.addClass(x));
 
   /** Set label text */
-  label1.text(this.label());
+  inputLabel.text(this.label());
 
   /** Append label to div contents */
-  div1.contents().push(label1);
+  columnDiv.append(inputLabel);
   
-  /** Create textArea element */
-  const textArea1 = new textArea.TextArea();
+  /** Create input */
+  const input = new ezhtml.TextArea();
   
-  /** If there are textArea classes to include, add them to label */
-  if ( this.textAreaClasses().length > 0 )
-    this.textAreaClasses().map(x => textArea1.addClass(x));
-  
-  /** If id is set, transfer to select element */
-  if ( this.id().length > 0 )
-    textArea1.id(this.id());
-  
-  /** If name is set, transfer to select element */
-  if ( this.name().length > 0 )
-    textArea1.name(this.name());
-  
-  /** If required is set, transfer to text area element */
-  if ( this.required() )
-    textArea1.required(true);
-  
-  /** Transfer rows to textArea element */
-  textArea1.rows(this.rows());
-  
-  /** Append input to div contents */
-  div1.contents().push(textArea1);
+  /** Transfer input classes to input */
+  this.inputClasses().map(x => input.addClass(x));
+
+  /** Transfer input properties */
+  input.autofocus(this.autofocus());
+  input.dirname(this.dirname());
+  input.disabled(this.disabled());
+  input.form(this.form());
+  input.id(this.id());
+  input.maxlength(this.maxlength());
+  input.name(this.name());
+  input.readonly(this.readonly());
+  input.required(this.required());
+  input.rows(this.rows());
+  input.wrap(this.wrap());
+
+  /** Append input to column div */
+  columnDiv.append(input);
   
   /** Return markup */
-  return div1.render(indent);
+  return columnDiv.render(indent);
 };
 
 /** Export class from module */

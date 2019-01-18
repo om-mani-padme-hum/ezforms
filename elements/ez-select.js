@@ -1,95 +1,95 @@
 /** Require external modules */
+const ezhtml = require(`html`);
 const ezobjects = require(`ezobjects`);
-
-/** Require local modules */
-const div = require(`./div`);
-const label = require(`./label`);
-const select = require(`./select`);
 
 /** Configure EZSelect class */
 const configEZSelect = {
   className: `EZSelect`,
-  properties: [    
+  properties: [
+    { name: `autofocus`, type: `boolean` },
     { name: `cols`, type: `int`, default: 16 },
-    { name: `divClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `labelClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `selectClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `label`, type: `string` },
+    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `disabled`, type: `boolean` },
+    { name: `form`, type: `string` },
     { name: `id`, type: `string` },
+    { name: `inputClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `inputLabelClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `label`, type: `string` },
     { name: `multiple`, type: `boolean` },
-    { name: `required`, type: `boolean` },
     { name: `name`, type: `string` },
     { name: `options`, type: `array`, arrayOf: { instanceOf: `Option` } }
+    { name: `required`, type: `boolean` },
+    { name: `size`, type: `string` }
   ]
 };
 
 /** Create EZSelect class */
 ezobjects.createClass(configEZSelect);
 
-/** Create method for adding class to div classes array */
-EZSelect.prototype.addDivClass = function (className) {
-  /** If the class doesn't already exist in the div classes array, add it */
-  if ( !this.divClasses().includes(className) )
-    this.divClasses().push(className);
+/** Create method for adding class to column div classes array */
+EZButton.prototype.addColumnDivClass = function (className) {
+  /** If the class doesn`t already exist in the column div classes array, add it */
+  if ( !this.columnDivClasses().includes(className) )
+    this.columnDivClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for adding class to select classes array */
-EZSelect.prototype.addSelectClass = function (className) {
-  /** If the class doesn't already exist in the select classes array, add it */
-  if ( !this.selectClasses().includes(className) )
-    this.selectClasses().push(className);
+/** Create method for adding class to input classes array */
+EZCheckboxGroup.prototype.addInputClass = function (className) {
+  /** If the class doesn`t already exist in the input classes array, add it */
+  if ( !this.inputClasses().includes(className) )
+    this.inputClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for adding class to label classes array */
-EZSelect.prototype.addLabelClass = function (className) {
-  /** If the class doesn't already exist in the label classes array, add it */
-  if ( !this.labelClasses().includes(className) )
-    this.labelClasses().push(className);
+/** Create method for adding class to input label classes array */
+EZCheckboxGroup.prototype.addInputLabelClass = function (className) {
+  /** If the class doesn`t already exist in the input label classes array, add it */
+  if ( !this.inputLabelClasses().includes(className) )
+    this.inputLabelClasses().push(className);
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for removing class from div classes array */
-EZSelect.prototype.removeDivClass = function (className) {
-  /** Find index of class in div classes array (if it exists) */
-  const index = this.divClasses().findIndex(x => x == className);
+/** Create method for removing class from column div classes array */
+EZButton.prototype.removeColumnDivClass = function (className) {
+  /** Find index of class in column div classes array (if it exists) */
+  const index = this.columnDivClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from div classes array */
+  /** If index exists, remove class from column div classes array */
   if ( index !== -1 )
-    this.divClasses(this.divClasses().splice(index, 1));
+    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for removing class from select classes array */
-EZSelect.prototype.removeSelectClass = function (className) {
-  /** Find index of class in select classes array (if it exists) */
-  const index = this.selectClasses().findIndex(x => x == className);
+/** Create method for removing class from input classes array */
+EZCheckboxGroup.prototype.removeInputClass = function (className) {
+  /** Find index of class in input classes array (if it exists) */
+  const index = this.inputClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from select classes array */
+  /** If index exists, remove class from input classes array */
   if ( index !== -1 )
-    this.selectClasses(this.selectClasses().splice(index, 1));
+    this.inputClasses(this.inputClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
 };
 
-/** Create method for removing class from label classes array */
-EZSelect.prototype.removeLabelClass = function (className) {
-  /** Find index of class in label classes array (if it exists) */
-  const index = this.labelClasses().findIndex(x => x == className);
+/** Create method for removing class from input label classes array */
+EZCheckboxGroup.prototype.removeInputLabelClass = function (className) {
+  /** Find index of class in input label classes array (if it exists) */
+  const index = this.inputLabelClasses().findIndex(x => x == className);
   
-  /** If index exists, remove class from label classes array */
+  /** If index exists, remove class from input label classes array */
   if ( index !== -1 )
-    this.labelClasses(this.labelClasses().splice(index, 1));
+    this.inputLabelClasses(this.inputLabelClasses().splice(index, 1));
   
   /** Return this class for call chaining */
   return this;
@@ -101,60 +101,51 @@ EZSelect.prototype.render = function (indent = 0) {
   if ( this.cols() < 1 || this.cols() > 16 )
     throw new RangeError(`EZSelect.render(): Invalid number, cols must be between 1 and 16 inclusive.`);
   
-  /** Create div element */
-  const div1 = new div.Div();
+  /** Create column div */
+  const columnDiv = new ezhtml.Div();
   
-  /** Set required cols class on div */
-  div1.addClass(`col-${this.cols()}`);
+  /** Set required cols class on column div */
+  columnDiv.addClass(`col-${this.cols()}`);
   
-  /** If there are div classes to include, add them to div */
-  if ( this.divClasses().length > 0 )
-    this.divClasses().map(x => div1.addClass(x));
+  /** Transfer column div classes to column div */
+  this.columnDivClasses().map(x => columnDiv.addClass(x));
   
   /** Create label element */
-  const label1 = new label.Label();
+  const inputLabel = new ezhtml.Label();
   
-  /** If there are label classes to include, add them to label */
-  if ( this.labelClasses().length > 0 )
-    this.labelClasses().map(x => label1.addClass(x));
+  /** Transfer input label classes to input label */
+  this.inputLabelClasses().map(x => inputLabel.addClass(x));
 
   /** Set label text */
-  label1.text(this.label());
+  inputLabel.text(this.label());
 
   /** Append label to div contents */
-  div1.contents().push(label1);
+  columnDiv.append(inputLabel);
   
-  /** Create select element */
-  const select1 = new select.Select();
+  /** Create input */
+  const input = new ezhtml.Select();
   
-  /** If there are select classes to include, add them to select */
-  if ( this.selectClasses().length > 0 )
-    this.selectClasses().map(x => select1.addClass(x));
+  /** Transfer input classes to input */
+  this.inputClasses().map(x => input.addClass(x));
   
-  /** If id is set, transfer to select element */
-  if ( this.id().length > 0 )
-    select1.id(this.id());
+  /** Transfer input properties */
+  input.autofocus(this.autofocus());
+  input.disabled(this.disabled());
+  input.form(this.form());
+  input.id(this.id());
+  input.multiple(this.multiple());
+  input.name(this.name());
+  input.required(this.required());
+  input.size(this.size());
   
-  /** If name is set, transfer to select element */
-  if ( this.name().length > 0 )
-    select1.name(this.name());
+  /** Append options to select content */
+  input.content(this.options());
   
-  /** If multiple is set, transfer to select element */
-  if ( this.multiple() )
-    select1.multiple(true);
-  
-  /** If required is set, transfer to select element */
-  if ( this.required() )
-    select1.required(true);
-  
-  /** Append options to select contents */
-  select1.contents().push(...this.options());
-  
-  /** Append input to div contents */
-  div1.contents().push(select1);
+  /** Append input to column div */
+  columnDiv.append(input);
   
   /** Return markup */
-  return div1.render(indent);
+  return columnDiv.render(indent);
 };
 
 /** Export class from module */
