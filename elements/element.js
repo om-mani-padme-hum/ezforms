@@ -1,6 +1,5 @@
 /** Require external modules */
 const ezobjects = require(`ezobjects`);
-const util = require(`util`);
 
 /** Configure class */
 const configElement = {

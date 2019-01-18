@@ -1,7 +1,53 @@
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-direction($val) {
+  -webkit-flex-direction: $val;
+  -moz-flex-direction: $val;
+  -ms-flex-direction: $val;
+  -o-flex-direction: $val;
+  flex-direction: $val;
+}
+
+@mixin flex-wrap($val) {
+  -webkit-flex-wrap: $val;
+  -moz-flex-wrap: $val;
+  -ms-flex-wrap: $val;
+  -o-flex-wrap: $val;
+  flex-wrap: $val;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex: $values;
+  -webkit-flex: $values;
+  -ms-flex: $values;
+  flex: $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  box-sizing: $val;
+}
+
 $num-cols: 16;
 
 form, * {
-  box-sizing: border-box;
+  @include box-sizing(border-box);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -12,9 +58,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 form {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  @include flexbox();
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
   justify-content: space-evenly;
   margin: auto;
   
@@ -237,19 +283,19 @@ select[multiple].show8 {
 
 %options {
   display: flex;
-  flex-wrap: nowrap;
+  @include flex-wrap(nowrap);
 }
 
 .options-horizontal {
   @extend %options;
   height: 34px;
-  flex-direction: row;
+  @include flex-direction(row);
   align-items: center;
 }
 
 .options-vertical {
   @extend %options;
-  flex-direction: column;
+  @include flex-direction(column);
   align-items: flex-start;
 }
 
