@@ -21,7 +21,7 @@
   "repository": {
     "type" : "git",
     "url" : "https://github.com/om-mani-padme-hum/ezforms"
-  }
+  },
   "dependencies": {
     "ezhtml": "^1.3.1",
     "ezobjects": "^5.4.4"
