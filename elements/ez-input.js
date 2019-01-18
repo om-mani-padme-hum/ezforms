@@ -133,7 +133,7 @@ EZInput.prototype.render = function (indent = 0) {
   this.columnDivClasses().map(x => columnDiv.addClass(x));
   
   /** Create label element */
-  const inputLabel = new label.Label();
+  const inputLabel = new ezhtml.Label();
   
   /** Transfer input label classes to input label */
   this.inputLabelClasses().map(x => inputLabel.addClass(x));
@@ -145,7 +145,7 @@ EZInput.prototype.render = function (indent = 0) {
   columnDiv.append(inputLabel);
   
   /** Create input */
-  const input = new input.Input();
+  const input = new ezhtml.Input();
   
   /** Transfer input classes to input */
   this.inputClasses().map(x => input.addClass(x));

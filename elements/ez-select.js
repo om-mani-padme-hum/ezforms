@@ -1,5 +1,5 @@
 /** Require external modules */
-const ezhtml = require(`html`);
+const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
 /** Configure EZSelect class */

@@ -119,7 +119,7 @@ Form.prototype.file = function () {
 
 Form.prototype.heading = function () {
   /** Create heading */
-  const heading = new elements.Heading();
+  const heading = new elements.EZHeading();
     
   /** Add heading to form */
   this.append(heading);
@@ -172,13 +172,13 @@ Form.prototype.number = function () {
 
 Form.prototype.option = function () {
   /** Create option */
-  const option = new elements.Option();
+  const option = new ezhtml.Option();
   
   /** Init last container to null */
   let lastContainer = null;
   
   /** Loop through contents... */
-  this.contents().forEach((content) => {
+  this.content().forEach((content) => {
     /** If valid container found, set as last container */
     if ( [`EZCheckboxGroup`, `EZRadioGroup`, `EZSelect`].includes(content.constructor.name) )
       lastContainer = content;
@@ -247,7 +247,7 @@ Form.prototype.select = function () {
 
 Form.prototype.space = function () {
   /** Create space */
-  const space = new elements.Space();
+  const space = new ezhtml.EZSpace();
   
   /** Add space to form */
   this.append(space);
