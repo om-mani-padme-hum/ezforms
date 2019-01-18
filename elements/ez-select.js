@@ -28,7 +28,7 @@ const configEZSelect = {
 ezobjects.createClass(configEZSelect);
 
 /** Create method for adding class to column div classes array */
-EZButton.prototype.addColumnDivClass = function (className) {
+EZSelect.prototype.addColumnDivClass = function (className) {
   /** If the class doesn`t already exist in the column div classes array, add it */
   if ( !this.columnDivClasses().includes(className) )
     this.columnDivClasses().push(className);
@@ -38,7 +38,7 @@ EZButton.prototype.addColumnDivClass = function (className) {
 };
 
 /** Create method for adding class to input classes array */
-EZCheckboxGroup.prototype.addInputClass = function (className) {
+EZSelect.prototype.addInputClass = function (className) {
   /** If the class doesn`t already exist in the input classes array, add it */
   if ( !this.inputClasses().includes(className) )
     this.inputClasses().push(className);
@@ -48,7 +48,7 @@ EZCheckboxGroup.prototype.addInputClass = function (className) {
 };
 
 /** Create method for adding class to input label classes array */
-EZCheckboxGroup.prototype.addInputLabelClass = function (className) {
+EZSelect.prototype.addInputLabelClass = function (className) {
   /** If the class doesn`t already exist in the input label classes array, add it */
   if ( !this.inputLabelClasses().includes(className) )
     this.inputLabelClasses().push(className);
@@ -58,7 +58,7 @@ EZCheckboxGroup.prototype.addInputLabelClass = function (className) {
 };
 
 /** Create method for removing class from column div classes array */
-EZButton.prototype.removeColumnDivClass = function (className) {
+EZSelect.prototype.removeColumnDivClass = function (className) {
   /** Find index of class in column div classes array (if it exists) */
   const index = this.columnDivClasses().findIndex(x => x == className);
   
@@ -71,7 +71,7 @@ EZButton.prototype.removeColumnDivClass = function (className) {
 };
 
 /** Create method for removing class from input classes array */
-EZCheckboxGroup.prototype.removeInputClass = function (className) {
+EZSelect.prototype.removeInputClass = function (className) {
   /** Find index of class in input classes array (if it exists) */
   const index = this.inputClasses().findIndex(x => x == className);
   
@@ -84,7 +84,7 @@ EZCheckboxGroup.prototype.removeInputClass = function (className) {
 };
 
 /** Create method for removing class from input label classes array */
-EZCheckboxGroup.prototype.removeInputLabelClass = function (className) {
+EZSelect.prototype.removeInputLabelClass = function (className) {
   /** Find index of class in input label classes array (if it exists) */
   const index = this.inputLabelClasses().findIndex(x => x == className);
   
