@@ -17,7 +17,7 @@ const configEZSelect = {
     { name: `label`, type: `string` },
     { name: `multiple`, type: `boolean` },
     { name: `name`, type: `string` },
-    { name: `options`, type: `array`, arrayOf: { instanceOf: `Option` } }
+    { name: `options`, type: `array`, arrayOf: { instanceOf: `Option` } },
     { name: `required`, type: `boolean` },
     { name: `size`, type: `string` }
   ]

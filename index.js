@@ -10,15 +10,15 @@ const configForm = {
   className: `Form`,
   extends: ezhtml.ContainerElement,
   properties: [
-    { name: 'acceptCharset', type: 'string' },
-    { name: 'action', type: 'string' },
-    { name: 'autocomplete', type: 'string' },
-    { name: 'enctype', type: 'string' },
+    { name: `acceptCharset`, type: `string` },
+    { name: `action`, type: `string` },
+    { name: `autocomplete`, type: `string` },
+    { name: `enctype`, type: `string` },
     { name: `id`, type: `string` },
-    { name: 'method', type: 'string' },
-    { name: 'name', type: 'string' },
-    { name: 'novalidate', type: 'boolean' },
-    { name: 'target', type: 'string' }
+    { name: `method`, type: `string` },
+    { name: `name`, type: `string` },
+    { name: `novalidate`, type: `boolean` },
+    { name: `target`, type: `string` }
   ]
 };
 

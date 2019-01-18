@@ -34,7 +34,7 @@ const configEZCheckboxGroup = {
     { name: `min`, type: `string` },
     { name: `multiple`, type: `boolean` },
     { name: `name`, type: `string` },
-    { name: `options`, type: `array`, arrayOf: { instanceOf: `Option` } }
+    { name: `options`, type: `array`, arrayOf: { instanceOf: `Option` } },
     { name: `pattern`, type: `string` },
     { name: `placeholder`, type: `string` },
     { name: `readonly`, type: `boolean` },
@@ -197,7 +197,7 @@ EZCheckboxGroup.prototype.render = function (indent = 0) {
   
   /** Validate align */
   if ( this.align() != `horizontal` && this.align() != `vertical` )
-    throw new RangeError(`EZCheckboxGroup.render(): Align value must be `horizontal` or `vertical`.`);
+    throw new RangeError(`EZCheckboxGroup.render(): Align value must be 'horizontal' or 'vertical'.`);
   
   /** Create column div */
   const columnDiv = new ezhtml.Div();
