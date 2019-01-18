@@ -332,6 +332,7 @@ Form.prototype.render = function (indent = 0) {
   form.acceptCharset(this.acceptCharset());
   form.action(this.action());
   form.autocomplete(this.autocomplete());
+  form.content(this.content());
   form.enctype(this.enctype());
   form.id(this.id());
   form.method(this.method());

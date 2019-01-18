@@ -70,6 +70,10 @@ EZHeading.prototype.render = function (indent = 0) {
   if ( this.cols() < 1 || this.cols() > 16 )
     throw new RangeError(`EZHeading.render(): Invalid number, cols must be between 1 and 16 inclusive.`);
   
+  /** Validate rank */
+  if ( this.rank() < 1 || this.rank() > 6 )
+    throw new RangeError(`EZHeading.render(): Invalid number, rank must be between 1 and 6 inclusive.`);
+  
   /** Create column div */
   const columnDiv = new ezhtml.Div();
   
@@ -80,10 +84,26 @@ EZHeading.prototype.render = function (indent = 0) {
   this.columnDivClasses().map(x => columnDiv.addClass(x));
   
   /** Create heading */
-  const heading = new ezhtml.Heading();
+  let heading = null;
+  
+  if ( this.rank() == 1 )
+    heading = new ezhtml.H1();
+  else if ( this.rank() == 2 )
+    heading = new ezhtml.H2();
+  else if ( this.rank() == 3 )
+    heading = new ezhtml.H3();
+  else if ( this.rank() == 4 )
+    heading = new ezhtml.H4();
+  else if ( this.rank() == 5 )
+    heading = new ezhtml.H5();
+  else if ( this.rank() == 6 )
+    heading = new ezhtml.H6();
   
   /** Transfer heading classes to heading */
   this.headingClasses().map(x => heading.addClass(x));
+  
+  /** Transfer properties to heading */
+  heading.text(this.text());
   
   /** Append heading to column div */
   columnDiv.append(heading);
