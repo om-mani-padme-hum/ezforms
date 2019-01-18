@@ -37,6 +37,7 @@ const configEZInput = {
     { name: `placeholder`, type: `string` },
     { name: `readonly`, type: `boolean` },
     { name: `required`, type: `boolean` },
+    { name: `selected`, type: `boolean` },
     { name: `size`, type: `int` },
     { name: `src`, type: `string` },
     { name: `step`, type: `string` },
@@ -156,7 +157,7 @@ EZInput.prototype.render = function (indent = 0) {
   input.alt(this.alt());
   input.autocomplete(this.autocomplete());
   input.autofocus(this.autofocus());
-  input.checked(option.selected());
+  input.checked(this.checked() || this.selected());
   input.dirname(this.dirname());
   input.disabled(this.disabled());
   input.form(this.form());
