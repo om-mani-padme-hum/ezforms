@@ -247,7 +247,7 @@ Form.prototype.select = function () {
 
 Form.prototype.space = function () {
   /** Create space */
-  const space = new ezhtml.EZSpace();
+  const space = new elements.EZSpace();
   
   /** Add space to form */
   this.append(space);
