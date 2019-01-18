@@ -112,7 +112,6 @@ EZButton.prototype.render = function (indent = 0) {
   button.name(this.name());
   button.text(this.text());
   button.type(this.type());
-  button.value(this.value());
   
   /** Append button to column div */
   columnDiv.append(button);
