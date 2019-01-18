@@ -4,7 +4,7 @@
   "description": "Easy HTML Form Rendering Using Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "eslint index.js elements/ez-button.js elements/ez-checkbox-group.js elements/ez-input.js elements/ez-radio-group.js elements/ez-select.js elements/ez-text-area.js elements/index.js"
+    "test": "eslint index.js elements/ez-button.js elements/ez-checkbox-group.js elements/ez-heading.js elements/ez-input.js elements/ez-radio-group.js elements/ez-select.js elements/ez-space.js elements/ez-text-area.js elements/index.js"
   },
   "keywords": [
     "Easy",

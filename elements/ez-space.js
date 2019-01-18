@@ -7,7 +7,7 @@ const configEZSpace = {
   className: `EZSpace`,
   properties: [
     { name: `cols`, type: `int`, default: 16 },
-    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } }
+    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
     { name: `text`, type: `string` }
   ]
 };
