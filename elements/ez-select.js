@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZSelect class */
 const configEZSelect = {
   className: `EZSelect`,
+  extends: ezhtml.Child,
   properties: [
     { name: `autofocus`, type: `boolean` },
     { name: `cols`, type: `int`, default: 16 },

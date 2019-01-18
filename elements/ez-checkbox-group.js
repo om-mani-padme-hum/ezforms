@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZCheckboxGroup class */
 const configEZCheckboxGroup = {
   className: `EZCheckboxGroup`,
+  extends: ezhtml.Child,
   properties: [
     { name: `accept`, type: `string` },
     { name: `align`, type: `string`, default: `horizontal` },

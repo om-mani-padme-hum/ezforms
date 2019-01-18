@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZTextArea class */
 const configEZTextArea = {
   className: `EZTextArea`,
+  extends: ezhtml.Child,
   properties: [
     { name: `autofocus`, type: `boolean` },
     { name: `cols`, type: `int`, default: 16 },

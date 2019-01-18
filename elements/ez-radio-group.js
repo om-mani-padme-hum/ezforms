@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZRadioGroup class */
 const configEZRadioGroup = {
   className: `EZRadioGroup`,
+  extends: ezhtml.Child,
   properties: [
     { name: `accept`, type: `string` },
     { name: `align`, type: `string`, default: `horizontal` },

@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZInput class */
 const configEZInput = {
   className: `EZInput`,
+  extends: ezhtml.Child,
   properties: [
     { name: `accept`, type: `string` },
     { name: `alt`, type: `string` },

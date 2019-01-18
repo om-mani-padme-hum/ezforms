@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZButton class */
 const configEZButton = {
   className: `EZButton`,
+  extends: ezhtml.Child,
   properties: [
     { name: `autofocus`, type: `boolean` },
     { name: `buttonClasses`, type: `array`, arrayOf: { type: `string` } },

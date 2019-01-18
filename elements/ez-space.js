@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZSpace class */
 const configEZSpace = {
   className: `EZSpace`,
+  extends: ezhtml.Child,
   properties: [
     { name: `cols`, type: `int`, default: 16 },
     { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },

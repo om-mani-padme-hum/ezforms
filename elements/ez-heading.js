@@ -5,6 +5,7 @@ const ezobjects = require(`ezobjects`);
 /** Configure EZHeading class */
 const configEZHeading = {
   className: `EZHeading`,
+  extends: ezhtml.Child,
   properties: [
     { name: `cols`, type: `int`, default: 16 },
     { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
