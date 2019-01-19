@@ -2,12 +2,17 @@
 const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
+/** Require local modules */
+const ezspace = require(`./ez-space`);;
+
 /** Configure EZHeading class */
 const configEZHeading = {
   className: `EZHeading`,
   extends: ezhtml.Child,
   properties: [
     { name: `cols`, type: `int`, default: 16 },
+    { name: `colsAfter`, type: `int` },
+    { name: `colsBefore`, type: `int` },
     { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
     { name: `headingClasses`, type: `array`, arrayOf: { type: `string` } },
     { name: `rank`, type: `int`, default: 1 },
@@ -108,8 +113,21 @@ EZHeading.prototype.render = function (indent = 0) {
   /** Append heading to column div */
   columnDiv.append(heading);
   
+  let markup = ``;
+  
+  /** If there are columns before, append space to markup */
+  if ( this.colsBefore() > 0 )
+    markup += new ezspace.EZSpace().cols(this.colsBefore()).render(indent);
+  
+  /** Append input to markup */
+  markup += columnDiv.render(indent);
+  
+  /** If there are columns after, append space to markup */
+  if ( this.colsAfter() > 0 )
+    markup += new ezspace.EZSpace().cols(this.colsAfter()).render(indent);
+  
   /** Return markup */
-  return columnDiv.render(indent);
+  return markup;
 };
 
 /** Export class from module */

@@ -1,8 +1,12 @@
-# EZ Forms v1.0.1
+# EZ Forms v1.1.0
 
 A super easy to use Node.js module for generating HTML 5 forms that can easily be customized with CSS using the default class names or your own.
 
-## Example (see example.js and example.ejs)
+## Installation
+
+`npm i ezforms`
+
+## Usage Example (see /example.js, /example.ejs, and /css/example.css)
 
 ```javascript
 const ejs = require(`ejs`);
@@ -24,18 +28,16 @@ app.get(`/`, (req, res) => {
   /** Create form heading (default 16 cols wide) */
   form.heading().rank(1).text(`My Example Form`);
   
-  /** Create two text inputs, separated with a space */
-  form.text().cols(6).name(`firstName`).label(`First Name:`).required(true);
-  form.space().cols(2);
-  form.text().cols(6).name(`lastName`).label(`Last Name:`).required(true);
-  form.space().cols(2);
+  /** Create two text inputs, allowing only letters and quotes */
+  form.text().cols(6).colsAfter(2).name(`firstName`).label(`First Name:`).required(true).pattern(`^[a-zA-Z&quot;]+$`);
+  form.text().cols(6).colsAfter(2).name(`lastName`).label(`Last Name:`).required(true).pattern(`^[a-zA-Z&quot;]+$`);
 
-  /** Create password inputs */
-  form.password().cols(8).name(`password`).label(`Choose Password:`).required(true);
-  form.password().cols(8).name(`password2`).label(`Confirm Password:`).required(true);
+  /** Create password inputs, requiring one uppercase letter, one lowercase letter, one number, at minimum 8 chars */
+  form.password().cols(7).colsAfter(1).name(`password`).label(`Choose Password:`).required(true).pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}`);
+  form.password().cols(7).colsAfter(1).name(`password2`).label(`Confirm Password:`).required(true);
   
   /** Create select pulldown input */
-  form.select().cols(8).name(`favoritePetType`).label(`Favorite Pet Type:`);
+  form.select().cols(6).colsAfter(2).name(`favoritePetType`).label(`Favorite Pet Type:`);
   form.option().value(`bird`).text(`Bird`);
   form.option().value(`cat`).text(`Cat`);
   form.option().value(`dog`).text(`Dog`);
@@ -78,12 +80,9 @@ app.get(`/`, (req, res) => {
   /** Create text area input (default 16 cols wide -- EZ form cols, not text area cols) */
   form.textarea().rows(4).name(`description`).label(`Describe Yourself:`);
   
-  /** Create buttons with spaces around */
-  form.space().cols(3);
-  form.button().cols(4).type(`reset`).text(`Reset`);
-  form.space().cols(2);
-  form.button().cols(4).type(`submit`).text(`Submit`);
-  form.space().cols(3);
+  /** Create buttons */
+  form.button().cols(4).colsBefore(3).colsAfter(2).type(`reset`).text(`Reset`);
+  form.button().cols(4).colsAfter(3).type(`submit`).text(`Submit`);
   
   /** Render EJS template with our rendered form */
   const html = ejs.render(fs.readFileSync(`example.ejs`).toString(), { form: form.render() });
@@ -107,3 +106,11 @@ app.listen(7000, () => {
   console.log(`Web server up and running on port 7000!`);
 });
 ```
+
+## Todo
+
+* Create vertical stack element for placing multiple inputs vertically adjacent to a single input
+
+## License
+
+MIT

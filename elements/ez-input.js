@@ -2,6 +2,9 @@
 const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
+/** Require local modules */
+const ezspace = require(`./ez-space`);;
+
 /** Configure EZInput class */
 const configEZInput = {
   className: `EZInput`,
@@ -13,6 +16,8 @@ const configEZInput = {
     { name: `autofocus`, type: `boolean` },
     { name: `checked`, type: `boolean` },
     { name: `cols`, type: `int`, default: 16 },
+    { name: `colsAfter`, type: `int` },
+    { name: `colsBefore`, type: `int` },
     { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
     { name: `dirname`, type: `string` },
     { name: `disabled`, type: `boolean` },
@@ -188,8 +193,21 @@ EZInput.prototype.render = function (indent = 0) {
   /** Append input to column div */
   columnDiv.append(input);
   
+  let markup = ``;
+  
+  /** If there are columns before, append space to markup */
+  if ( this.colsBefore() > 0 )
+    markup += new ezspace.EZSpace().cols(this.colsBefore()).render(indent);
+  
+  /** Append input to markup */
+  markup += columnDiv.render(indent);
+  
+  /** If there are columns after, append space to markup */
+  if ( this.colsAfter() > 0 )
+    markup += new ezspace.EZSpace().cols(this.colsAfter()).render(indent);
+  
   /** Return markup */
-  return columnDiv.render(indent);
+  return markup;
 };
 
 /** Export class from module */

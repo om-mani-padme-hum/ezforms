@@ -2,6 +2,9 @@
 const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
+/** Require local modules */
+const ezspace = require(`./ez-space`);;
+
 /** Configure EZRadioGroup class */
 const configEZRadioGroup = {
   className: `EZRadioGroup`,
@@ -14,6 +17,8 @@ const configEZRadioGroup = {
     { name: `autofocus`, type: `boolean` },
     { name: `checked`, type: `boolean` },
     { name: `cols`, type: `int`, default: 16 },
+    { name: `colsAfter`, type: `int` },
+    { name: `colsBefore`, type: `int` },
     { name: `dirname`, type: `string` },
     { name: `disabled`, type: `boolean` },
     { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
@@ -296,8 +301,21 @@ EZRadioGroup.prototype.render = function (indent = 0) {
   /** Append group div to column div */
   columnDiv.append(groupDiv);
   
+  let markup = ``;
+  
+  /** If there are columns before, append space to markup */
+  if ( this.colsBefore() > 0 )
+    markup += new ezspace.EZSpace().cols(this.colsBefore()).render(indent);
+  
+  /** Append input to markup */
+  markup += columnDiv.render(indent);
+  
+  /** If there are columns after, append space to markup */
+  if ( this.colsAfter() > 0 )
+    markup += new ezspace.EZSpace().cols(this.colsAfter()).render(indent);
+  
   /** Return markup */
-  return columnDiv.render(indent);
+  return markup;
 };
 
 /** Export class from module */

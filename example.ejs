@@ -13,11 +13,11 @@
     </style>
     <script>
       $( document ).ready(() => {
-        $( `#ageSlider` ).change(() => {
+        $( `#ageSlider` ).on(`input`, () => {
           $( `#age` ).val($( `#ageSlider` ).val());
         });
         
-        $( `#age` ).change(() => {
+        $( `#age` ).on(`input`, () => {
           $( `#ageSlider` ).val($( `#age` ).val());
         });
       });
