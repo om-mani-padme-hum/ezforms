@@ -10,7 +10,7 @@ const configEZHeading = {
     { name: `cols`, type: `int`, default: 16 },
     { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
     { name: `headingClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `rank`, type: `int` },
+    { name: `rank`, type: `int`, default: 1 },
     { name: `text`, type: `string` }
   ]
 };

@@ -8,18 +8,7 @@ const elements = require(`./elements`);
 /** Configure class */
 const configForm = {
   className: `Form`,
-  extends: ezhtml.ContainerElement,
-  properties: [
-    { name: `acceptCharset`, type: `string` },
-    { name: `action`, type: `string` },
-    { name: `autocomplete`, type: `string` },
-    { name: `enctype`, type: `string` },
-    { name: `id`, type: `string` },
-    { name: `method`, type: `string` },
-    { name: `name`, type: `string` },
-    { name: `novalidate`, type: `boolean` },
-    { name: `target`, type: `string` }
-  ]
+  extends: ezhtml.Form
 };
 
 /** Create class */
@@ -321,27 +310,6 @@ Form.prototype.week = function () {
   
   /** Return input for call chaining */
   return input;
-};
-
-/** Create method for rendering element */
-Form.prototype.render = function (indent = 0) {
-  /** Create form */
-  const form = new ezhtml.Form();
-
-  /** Transfer form properties */
-  form.acceptCharset(this.acceptCharset());
-  form.action(this.action());
-  form.autocomplete(this.autocomplete());
-  form.content(this.content());
-  form.enctype(this.enctype());
-  form.id(this.id());
-  form.method(this.method());
-  form.name(this.name());
-  form.novalidate(this.novalidate());
-  form.target(this.target());
-  
-  /** Return markup */
-  return form.render(indent);
 };
 
 /** Export class from module */

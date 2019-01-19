@@ -1,10 +1,3 @@
-# EZ Forms v1.0.1
-
-A super easy to use Node.js module for generating HTML 5 forms that can easily be customized with CSS using the default class names or your own.
-
-## Example (see example.js and example.ejs)
-
-```javascript
 const ejs = require(`ejs`);
 const express = require(`express`);
 const ezforms = require(`./index`);
@@ -106,4 +99,3 @@ app.get(`/js/jquery.min.js`, (req, res) => {
 app.listen(7000, () => {
   console.log(`Web server up and running on port 7000!`);
 });
-```

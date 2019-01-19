@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Example Form</title>
+    <link rel='stylesheet' type='text/css' href='/css/example.css'>
+    <script type='text/javascript' src='/js/jquery.min.js'></script>
+    <style>
+      .pad-me { padding-left: 20px; padding-top: 5px; }
+      h1 { color: rgb(69, 107, 168); }
+      button[type=reset] { color: rgb(225, 225, 225); background: rgb(225, 0, 0); }
+      button[type=submit] { color: rgb(225, 225, 225); background: rgb(69, 107, 168); }
+      button[type=reset]:hover { color: rgba(225, 225, 225, 0.8); background: rgba(225, 0, 0, 0.8); }
+      button[type=submit]:hover { color: rgba(225, 225, 225, 0.8); background: rgba(69, 107, 168, 0.8); }
+    </style>
+    <script>
+      $( document ).ready(() => {
+        $( `#ageSlider` ).change(() => {
+          $( `#age` ).val($( `#ageSlider` ).val());
+        });
+        
+        $( `#age` ).change(() => {
+          $( `#ageSlider` ).val($( `#age` ).val());
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div style='margin: auto; width: 500px;'>
+<%-form-%>
+    </div>
+  </body>
+</html>
