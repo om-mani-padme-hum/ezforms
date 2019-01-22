@@ -1,4 +1,4 @@
-# EZ Forms v1.1.1
+# EZ Forms v1.1.2
 
 A super easy to use Node.js module for generating HTML 5 forms that can easily be customized with CSS using the default class names or your own.
 

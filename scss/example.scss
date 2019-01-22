@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
   padding: 0px;
-  margin: 5px 0px 12px 0px;
+  margin: 5px 0px 5px 0px;
 }
 
 form {
@@ -115,7 +115,7 @@ input[type=date], input[type=datetime-local], input[type=time], input[type=month
 }
 
 input[type=range] {
-  margin: 8px 0px 11px 0px;
+  margin-top: 3px;
 }
 
 input[type=radio] {
@@ -276,4 +276,8 @@ select[multiple] {
 .options-vertical > div {
   @extend %option;
   display: block;
+}
+
+button {
+  margin-top: 10px;
 }
