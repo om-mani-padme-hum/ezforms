@@ -51,7 +51,7 @@ EZAlert.prototype.render = function (indent = 0) {
   else if ( this.type() == `info` )
     columnDiv.addClass(`alert-info`);
   
-  const strong = new ezhtml.Strong().text(this.strong() + `&nbsp;&nbsp;`);
+  const strong = new ezhtml.Strong().text(this.strong() + `&nbsp;`);
   
   /** Append strong text to column div if it has length */
   if ( this.strong().length > 0 )
