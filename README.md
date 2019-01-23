@@ -1,4 +1,4 @@
-# EZ Forms v1.1.2
+# EZ Forms v1.2.0
 
 A super easy to use Node.js module for generating HTML 5 forms that can easily be customized with CSS using the default class names or your own.
 
@@ -27,6 +27,8 @@ app.get(`/`, (req, res) => {
   
   /** Create form heading (default 16 cols wide) */
   form.heading().rank(1).text(`My Example Form`);
+  
+  form.alert().cols(16).type(`error`).strong(`Error!`).text(`Username or password invalid!`);
   
   /** Create two text inputs, allowing only letters and quotes */
   form.text().cols(6).colsAfter(2).name(`firstName`).label(`First Name:`).required(true).pattern(`^[a-zA-Z&quot;]+$`);

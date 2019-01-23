@@ -14,6 +14,17 @@ const configForm = {
 /** Create class */
 ezobjects.createClass(configForm);
 
+Form.prototype.alert = function () {
+  /** Create alert */
+  const alert = new elements.EZAlert();
+  
+  /** Add alert to form */
+  this.append(alert);
+  
+  /** Return alert for call chaining */
+  return alert;
+};
+
 Form.prototype.button = function () {
   /** Create button */
   const button = new elements.EZButton();
