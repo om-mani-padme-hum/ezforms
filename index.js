@@ -128,6 +128,20 @@ Form.prototype.heading = function () {
   return heading;
 };
 
+Form.prototype.hidden = function () {
+  /** Create input */
+  const input = new ezhtml.Input();
+  
+  /** Set input type */
+  input.type(`hidden`);
+  
+  /** Add input to form */
+  this.append(input);
+  
+  /** Return input for call chaining */
+  return input;
+};
+
 Form.prototype.month = function () {
   /** Create input */
   const input = new elements.EZInput();
