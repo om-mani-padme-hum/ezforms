@@ -14,6 +14,17 @@ const configForm = {
 /** Create class */
 ezobjects.createClass(configForm);
 
+Form.prototype.alert = function () {
+  /** Create alert */
+  const alert = new elements.EZAlert();
+  
+  /** Add alert to form */
+  this.append(alert);
+  
+  /** Return alert for call chaining */
+  return alert;
+};
+
 Form.prototype.button = function () {
   /** Create button */
   const button = new elements.EZButton();
@@ -115,6 +126,20 @@ Form.prototype.heading = function () {
   
   /** Return heading for call chaining */
   return heading;
+};
+
+Form.prototype.hidden = function () {
+  /** Create input */
+  const input = new ezhtml.Input();
+  
+  /** Set input type */
+  input.type(`hidden`);
+  
+  /** Add input to form */
+  this.append(input);
+  
+  /** Return input for call chaining */
+  return input;
 };
 
 Form.prototype.month = function () {

@@ -1,3 +1,4 @@
+const ezAlert = require(`./ez-alert`);
 const ezButton = require(`./ez-button`);
 const ezCheckboxGroup = require(`./ez-checkbox-group`);
 const ezHeading = require(`./ez-heading`);
@@ -7,6 +8,7 @@ const ezSelect = require(`./ez-select`);
 const ezSpace = require(`./ez-space`);
 const ezTextArea = require(`./ez-text-area`);
 
+module.exports.EZAlert = ezAlert.EZAlert;
 module.exports.EZButton = ezButton.EZButton;
 module.exports.EZCheckboxGroup = ezCheckboxGroup.EZCheckboxGroup;
 module.exports.EZHeading = ezHeading.EZHeading;
