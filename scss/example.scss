@@ -94,16 +94,19 @@ label {
   margin-bottom: 10px;
 }
 
-input[type=text], input[type=password], input[type=email], input[type=tel], input[type=file], input[type=number], input[type=url] {
+input[type=text], input[type=password], input[type=email], input[type=tel], input[type=file], input[type=number], input[type=url], textarea {
   padding: 6px;
   border-radius: 5px;
   width: 100%;
   font-size: 16px;
-  font-family: system-ui;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type=color] {
   height: 32px;
+  width: 48px;
+  padding: 2px;
+  border-width: 1px;
 }
 
 input[type=date], input[type=datetime-local], input[type=time], input[type=month], input[type=week] {
@@ -111,7 +114,7 @@ input[type=date], input[type=datetime-local], input[type=time], input[type=month
   border-radius: 5px;
   width: 100%;
   font-size: 16px;
-  font-family: system-ui;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type=range] {
@@ -120,6 +123,10 @@ input[type=range] {
 
 input[type=radio] {
   display: inline-block;
+}
+
+input:not([type=checkbox]):not([type=radio]):not([type=file]) {
+  height: 33px;
 }
 
 select {
@@ -291,9 +298,11 @@ button {
 
 .alert-error {
   @extend %error;
-  color: rgba(255, 0, 0, 1);
-  border: 2px solid rgba(255, 0, 0, 0.5);
-  background-color: rgba(255, 0, 0, 0.3);
+  color: rgba(198, 13, 38, 1);
+  border: 2px solid rgba(198, 13, 38, 0.5);
+  background-color: rgba(198, 13, 38, 0.3);
+  margin-left: -50px;
+  margin-right: -50px;
 }
 
 .alert-warning {
@@ -315,4 +324,35 @@ button {
   color: rgba(50, 132, 39, 1);
   border: 2px solid rgba(50, 132, 39, 0.5);
   background-color: rgba(50, 132, 39, 0.3);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #446e9b;
+}
+
+button[type=reset] {
+  color: rgba(255, 255, 255, 1);
+  background: rgba(225, 0, 0, 1);
+}
+
+button[type=reset]:hover {
+  background: rgba(225, 0, 0, 0.8);
+}
+
+button[type=button] {
+  color: rgba(255, 255, 255, 1);
+  background: rgba(125, 125, 125, 1);
+}
+
+button[type=button]:hover {
+  background: rgba(125, 125, 125, 0.8);
+}
+
+button[type=submit] {
+  color: rgba(255, 255, 255, 1);
+  background: rgba(68, 110, 155, 1);
+}
+
+button[type=submit]:hover {
+  background: rgba(68, 110, 155, 0.8);
 }
