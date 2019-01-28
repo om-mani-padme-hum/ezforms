@@ -28,6 +28,7 @@ const configEZTextArea = {
     { name: `readonly`, type: `boolean` },
     { name: `required`, type: `boolean` },
     { name: `rows`, type: `int` },
+    { name: `text`, type: `string` },
     { name: `wrap`, type: `string` }
   ]
 };
@@ -148,6 +149,7 @@ EZTextArea.prototype.render = function (indent = 0) {
   input.readonly(this.readonly());
   input.required(this.required());
   input.rows(this.rows());
+  input.text(this.text());
   input.wrap(this.wrap());
 
   /** Append input to column div */

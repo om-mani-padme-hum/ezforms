@@ -24,8 +24,8 @@ app.get(`/`, (req, res) => {
   form.text().cols(6).colsAfter(2).name(`lastName`).label(`Last Name:`).required(true).pattern(`^[a-zA-Z&quot;]+$`);
 
   /** Create password inputs, requiring one uppercase letter, one lowercase letter, one number, at minimum 8 chars */
-  form.password().cols(7).colsAfter(1).name(`password`).label(`Choose Password:`).required(true).pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}`);
-  form.password().cols(7).colsAfter(1).name(`password2`).label(`Confirm Password:`).required(true);
+  form.password().cols(7).colsAfter(1).name(`password`).label(`Choose Password:`).required(true).pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}`);
+  form.password().cols(7).colsAfter(1).name(`password2`).label(`Confirm Password:`).required(true).pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}`);
   
   /** Create select pulldown input */
   form.select().cols(6).colsAfter(2).name(`favoritePetType`).label(`Favorite Pet Type:`);
@@ -66,7 +66,7 @@ app.get(`/`, (req, res) => {
   form.date().cols(6).name(`birthDate`).label(`Birth Date:`);
   
   /** Create email input */
-  form.email().cols(10).name(`email`).label(`Email Address:`);
+  form.email().cols(10).name(`email`).label(`Email Address:`).pattern(`[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$`);
   
   /** Create text area input (default 16 cols wide -- EZ form cols, not text area cols) */
   form.textarea().rows(4).name(`description`).label(`Describe Yourself:`);
