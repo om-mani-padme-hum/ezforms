@@ -1,6 +1,6 @@
 {
   "name": "ezforms",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Easy HTML Form Rendering Using Node.js",
   "main": "index.js",
   "scripts": {
