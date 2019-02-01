@@ -270,6 +270,20 @@ Form.prototype.space = function () {
   return space;
 };
 
+Form.prototype.tel = function () {
+  /** Create input */
+  const input = new elements.EZInput();
+  
+  /** Set input type */
+  input.type(`tel`);
+  
+  /** Add input to form */
+  this.append(input);
+  
+  /** Return input for call chaining */
+  return input;
+};
+
 Form.prototype.textarea = function () {
   /** Create text area */
   const textArea = new elements.EZTextArea();
