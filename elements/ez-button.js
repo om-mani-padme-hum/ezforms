@@ -8,25 +8,13 @@ const ezspace = require(`./ez-space`);;
 /** Configure EZButton class */
 const configEZButton = {
   className: `EZButton`,
-  extends: ezhtml.Child,
+  extends: ezhtml.Button,
   properties: [
-    { name: `autofocus`, type: `boolean` },
     { name: `buttonClasses`, type: `array`, arrayOf: { type: `string` } },
     { name: `cols`, type: `int`, default: 16 },
     { name: `colsAfter`, type: `int` },
     { name: `colsBefore`, type: `int` },
     { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `disabled`, type: `boolean` },
-    { name: `form`, type: `string` },
-    { name: `formaction`, type: `string` },
-    { name: `formenctype`, type: `string` },
-    { name: `formmethod`, type: `string` },
-    { name: `formnovalidate`, type: `boolean` },
-    { name: `formtarget`, type: `string` },
-    { name: `id`, type: `string` },
-    { name: `name`, type: `string` },
-    { name: `text`, type: `string` },
-    { name: `type`, type: `string`, default: `submit` }
   ]
 };
 
@@ -86,7 +74,7 @@ EZButton.prototype.render = function (indent = 0) {
     throw new RangeError(`EZButton.render(): Invalid number, cols must be between 1 and 16 inclusive.`);
   
   /** Validate text */
-  if ( this.text().length == 0 )
+  if ( this.content().length == 0 )
     throw new ReferenceError(`EZButton.render(): Invalid button text, must not be blank.`);
   
   /** Create column div */
@@ -101,6 +89,13 @@ EZButton.prototype.render = function (indent = 0) {
   /** Create button element */
   const button = new ezhtml.Button();
   
+  button.attributes(this.attributes());
+  button.classes(this.classes());
+  button.id(this.id());
+  button.style(this.style());
+  button.title(this.title());
+  button.content(this.content());
+  
   /** Transfer button classes to button */
   this.buttonClasses().map(x => button.addClass(x));
   
@@ -113,11 +108,9 @@ EZButton.prototype.render = function (indent = 0) {
   button.formmethod(this.formmethod());
   button.formnovalidate(this.formnovalidate());
   button.formtarget(this.formtarget());
-  button.id(this.id());
   button.name(this.name());
-  button.text(this.text());
   button.type(this.type());
-  
+    
   /** Append button to column div */
   columnDiv.append(button);
   
