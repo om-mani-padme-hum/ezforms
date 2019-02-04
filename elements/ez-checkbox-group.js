@@ -21,19 +21,19 @@ const configEZCheckboxGroup = {
     { name: `colsBefore`, type: `int` },
     { name: `dirname`, type: `string` },
     { name: `disabled`, type: `boolean` },
-    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `groupDivClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `inputDivClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `columnDivClasses`, type: `string` },
+    { name: `groupDivClasses`, type: `string` },
+    { name: `inputDivClasses`, type: `string` },
     { name: `form`, type: `string` },
     { name: `formaction`, type: `string` },
     { name: `formenctype`, type: `string` },
     { name: `formmethod`, type: `string` },
     { name: `formnovalidate`, type: `boolean` },
     { name: `formtarget`, type: `string` },
-    { name: `inputClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `inputClasses`, type: `string` },
     { name: `label`, type: `string` },
-    { name: `groupLabelClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `inputLabelClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `groupLabelClasses`, type: `string` },
+    { name: `inputLabelClasses`, type: `string` },
     { name: `list`, type: `string` },
     { name: `max`, type: `string` },
     { name: `maxlength`, type: `string` },
@@ -56,142 +56,244 @@ const configEZCheckboxGroup = {
 /** Create EZCheckboxGroup class */
 ezobjects.createClass(configEZCheckboxGroup);
 
-/** Create method for adding class to column div classes array */
+/** Create method for adding class to column div classes */
 EZCheckboxGroup.prototype.addColumnDivClass = function (className) {
-  /** If the class doesn`t already exist in the column div classes array, add it */
-  if ( !this.columnDivClasses().includes(className) )
-    this.columnDivClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._columnDivClasses.split(' ').includes(classx) )
+        this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to group div classes array */
+/** Create method for adding class to group div classes */
 EZCheckboxGroup.prototype.addGroupDivClass = function (className) {
-  /** If the class doesn`t already exist in the group div classes array, add it */
-  if ( !this.groupDivClasses().includes(className) )
-    this.groupDivClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._groupDivClasses.split(' ').includes(classx) )
+        this._groupDivClasses = this._groupDivClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addGroupDivClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addGroupDivClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to input div classes array */
+/** Create method for adding class to input div classes */
 EZCheckboxGroup.prototype.addInputDivClass = function (className) {
-  /** If the class doesn`t already exist in the input div classes array, add it */
-  if ( !this.inputDivClasses().includes(className) )
-    this.inputDivClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._inputDivClasses.split(' ').includes(classx) )
+        this._inputDivClasses = this._inputDivClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addInputDivClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addInputDivClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to input classes array */
+/** Create method for adding class to input classes */
 EZCheckboxGroup.prototype.addInputClass = function (className) {
-  /** If the class doesn`t already exist in the input classes array, add it */
-  if ( !this.inputClasses().includes(className) )
-    this.inputClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._inputClasses.split(' ').includes(classx) )
+        this._inputClasses = this._inputClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addInputClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addInputClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to group label classes array */
+/** Create method for adding class to group label classes */
 EZCheckboxGroup.prototype.addGroupLabelClass = function (className) {
-  /** If the class doesn`t already exist in the group label classes array, add it */
-  if ( !this.groupLabelClasses().includes(className) )
-    this.groupLabelClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._groupLabelClasses.split(' ').includes(classx) )
+        this._groupLabelClasses = this._groupLabelClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addGroupLabelClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addGroupLabelClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to input label classes array */
+/** Create method for adding class to label classes */
 EZCheckboxGroup.prototype.addInputLabelClass = function (className) {
-  /** If the class doesn`t already exist in the input label classes array, add it */
-  if ( !this.inputLabelClasses().includes(className) )
-    this.inputLabelClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._inputLabelClasses.split(' ').includes(classx) )
+        this._inputLabelClasses = this._inputLabelClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addInputLabelClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addInputLabelClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from column div classes array */
+/** Create method for removing class from column div classes */
 EZCheckboxGroup.prototype.removeColumnDivClass = function (className) {
-  /** Find index of class in column div classes array (if it exists) */
-  const index = this.columnDivClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from column div classes array */
-  if ( index !== -1 )
-    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._columnDivClasses.split(' ').includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeColumnDivClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from group div classes array */
+/** Create method for removing class from group div classes */
 EZCheckboxGroup.prototype.removeGroupDivClass = function (className) {
-  /** Find index of class in group div classes array (if it exists) */
-  const index = this.groupDivClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from group div classes array */
-  if ( index !== -1 )
-    this.groupDivClasses(this.groupDivClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._groupDivClasses.split(' ').includes(className) )
+      this._groupDivClasses = this._groupDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeGroupDivClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from input div classes array */
+/** Create method for removing class from input div classes */
 EZCheckboxGroup.prototype.removeInputDivClass = function (className) {
-  /** Find index of class in input div classes array (if it exists) */
-  const index = this.inputDivClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from input div classes array */
-  if ( index !== -1 )
-    this.inputDivClasses(this.inputDivClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._inputDivClasses.split(' ').includes(className) )
+      this._inputDivClasses = this._inputDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeInputDivClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
 
-/** Create method for removing class from input classes array */
+/** Create method for removing class from input classes */
 EZCheckboxGroup.prototype.removeInputClass = function (className) {
-  /** Find index of class in input classes array (if it exists) */
-  const index = this.inputClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from input classes array */
-  if ( index !== -1 )
-    this.inputClasses(this.inputClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._inputClasses.split(' ').includes(className) )
+      this._inputClasses = this._inputClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeInputClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from group label classes array */
+/** Create method for removing class from group label classes */
 EZCheckboxGroup.prototype.removeGroupLabelClass = function (className) {
-  /** Find index of class in group label classes array (if it exists) */
-  const index = this.groupLabelClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from group label classes array */
-  if ( index !== -1 )
-    this.groupLabelClasses(this.groupLabelClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._groupLabelClasses.split(' ').includes(className) )
+      this._groupLabelClasses = this._groupLabelClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeGroupLabelClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from input label classes array */
+/** Create method for removing class from input label classes */
 EZCheckboxGroup.prototype.removeInputLabelClass = function (className) {
-  /** Find index of class in input label classes array (if it exists) */
-  const index = this.inputLabelClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from input label classes array */
-  if ( index !== -1 )
-    this.inputLabelClasses(this.inputLabelClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._inputLabelClasses.split(' ').includes(className) )
+      this._inputLabelClasses = this._inputLabelClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeInputLabelClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
@@ -212,13 +314,13 @@ EZCheckboxGroup.prototype.render = function (indent = 0) {
   columnDiv.addClass(`col-${this.cols()}`);
   
   /** Transfer column div classes to column div */
-  this.columnDivClasses().map(x => columnDiv.addClass(x));
+  this.columnDivClasses().split(` `).map(x => columnDiv.addClass(x));
   
   /** Create group label */
   const groupLabel = new ezhtml.Label();
   
   /** Transfer group label classes to group label */
-  this.groupLabelClasses().map(x => groupLabel.addClass(x));
+  this.groupLabelClasses().split(` `).map(x => groupLabel.addClass(x));
 
   /** Set group label text */
   groupLabel.text(this.label());
@@ -233,7 +335,7 @@ EZCheckboxGroup.prototype.render = function (indent = 0) {
   groupDiv.addClass(`options-${this.align()}`);
   
   /** Transfer group div classes to group div */
-  this.groupDivClasses().map(x => groupDiv.addClass(x));
+  this.groupDivClasses().split(` `).map(x => groupDiv.addClass(x));
   
   /** Loop through each option */
   this.options().forEach((option) => {
@@ -241,13 +343,13 @@ EZCheckboxGroup.prototype.render = function (indent = 0) {
     const inputDiv = new ezhtml.Div();
     
     /** Transfer input div classes to input div */
-    this.inputDivClasses().map(x => inputDiv.addClass(x));
+    this.inputDivClasses().split(` `).map(x => inputDiv.addClass(x));
 
     /** Create input element */
     const input = new ezhtml.Input();
 
     /** Transfer input classes to input */
-    this.inputClasses().map(x => input.addClass(x));
+    this.inputClasses().split(` `).map(x => input.addClass(x));
     
     /** Transfer input properties */
     input.accept(this.accept());
@@ -286,7 +388,7 @@ EZCheckboxGroup.prototype.render = function (indent = 0) {
     const inputLabel = new ezhtml.Label();
     
     /** Transfer input label classes to input label */
-    this.inputLabelClasses().map(x => inputLabel.addClass(x));
+    this.inputLabelClasses().split(` `).map(x => inputLabel.addClass(x));
     
     /** Transfer option content to input label */
     inputLabel.content(option.content());

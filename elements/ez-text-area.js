@@ -14,13 +14,13 @@ const configEZTextArea = {
     { name: `cols`, type: `int`, default: 16 },
     { name: `colsAfter`, type: `int` },
     { name: `colsBefore`, type: `int` },
-    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `columnDivClasses`, type: `string` },
     { name: `dirname`, type: `string` },
     { name: `disabled`, type: `boolean` },
     { name: `form`, type: `string` },
     { name: `id`, type: `string` },
-    { name: `inputClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `inputLabelClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `inputClasses`, type: `string` },
+    { name: `inputLabelClasses`, type: `string` },
     { name: `label`, type: `string` },
     { name: `maxlength`, type: `int` },
     { name: `name`, type: `string` },
@@ -36,72 +36,123 @@ const configEZTextArea = {
 /** Create EZTextArea class */
 ezobjects.createClass(configEZTextArea);
 
-/** Create method for adding class to column div classes array */
+/** Create method for adding class to column div classes */
 EZTextArea.prototype.addColumnDivClass = function (className) {
-  /** If the class doesn`t already exist in the column div classes array, add it */
-  if ( !this.columnDivClasses().includes(className) )
-    this.columnDivClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._columnDivClasses.split(' ').includes(classx) )
+        this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to input classes array */
+/** Create method for adding class to input classes */
 EZTextArea.prototype.addInputClass = function (className) {
-  /** If the class doesn`t already exist in the input classes array, add it */
-  if ( !this.inputClasses().includes(className) )
-    this.inputClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._inputClasses.split(' ').includes(classx) )
+        this._inputClasses = this._inputClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addInputClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addInputClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to input label classes array */
+/** Create method for adding class to label classes */
 EZTextArea.prototype.addInputLabelClass = function (className) {
-  /** If the class doesn`t already exist in the input label classes array, add it */
-  if ( !this.inputLabelClasses().includes(className) )
-    this.inputLabelClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._inputLabelClasses.split(' ').includes(classx) )
+        this._inputLabelClasses = this._inputLabelClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addInputLabelClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addInputLabelClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from column div classes array */
+/** Create method for removing class from column div classes */
 EZTextArea.prototype.removeColumnDivClass = function (className) {
-  /** Find index of class in column div classes array (if it exists) */
-  const index = this.columnDivClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from column div classes array */
-  if ( index !== -1 )
-    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._columnDivClasses.split(' ').includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeColumnDivClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from input classes array */
+/** Create method for removing class from input classes */
 EZTextArea.prototype.removeInputClass = function (className) {
-  /** Find index of class in input classes array (if it exists) */
-  const index = this.inputClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from input classes array */
-  if ( index !== -1 )
-    this.inputClasses(this.inputClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._inputClasses.split(' ').includes(className) )
+      this._inputClasses = this._inputClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeInputClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from input label classes array */
+/** Create method for removing class from input label classes */
 EZTextArea.prototype.removeInputLabelClass = function (className) {
-  /** Find index of class in input label classes array (if it exists) */
-  const index = this.inputLabelClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from input label classes array */
-  if ( index !== -1 )
-    this.inputLabelClasses(this.inputLabelClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._inputLabelClasses.split(' ').includes(className) )
+      this._inputLabelClasses = this._inputLabelClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeInputLabelClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
@@ -118,13 +169,13 @@ EZTextArea.prototype.render = function (indent = 0) {
   columnDiv.addClass(`col-${this.cols()}`);
   
   /** Transfer column div classes to column div */
-  this.columnDivClasses().map(x => columnDiv.addClass(x));
+  this.columnDivClasses().split(` `).map(x => columnDiv.addClass(x));
   
   /** Create label element */
   const inputLabel = new ezhtml.Label();
   
   /** Transfer input label classes to input label */
-  this.inputLabelClasses().map(x => inputLabel.addClass(x));
+  this.inputLabelClasses().split(` `).map(x => inputLabel.addClass(x));
 
   /** Set label text */
   inputLabel.text(this.label());
@@ -136,7 +187,7 @@ EZTextArea.prototype.render = function (indent = 0) {
   const input = new ezhtml.TextArea();
   
   /** Transfer input classes to input */
-  this.inputClasses().map(x => input.addClass(x));
+  this.inputClasses().split(` `).map(x => input.addClass(x));
 
   /** Transfer input properties */
   input.autofocus(this.autofocus());

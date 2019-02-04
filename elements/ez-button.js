@@ -10,60 +10,94 @@ const configEZButton = {
   className: `EZButton`,
   extends: ezhtml.Button,
   properties: [
-    { name: `buttonClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `buttonClasses`, type: `string` },
     { name: `cols`, type: `int`, default: 16 },
     { name: `colsAfter`, type: `int` },
     { name: `colsBefore`, type: `int` },
-    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `columnDivClasses`, type: `string` },
   ]
 };
 
 /** Create EZButton class */
 ezobjects.createClass(configEZButton);
 
-/** Create method for adding class to column div classes array */
+/** Create method for adding class to column div classes */
 EZButton.prototype.addColumnDivClass = function (className) {
-  /** If the class doesn`t already exist in the column div classes array, add it */
-  if ( !this.columnDivClasses().includes(className) )
-    this.columnDivClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._columnDivClasses.split(' ').includes(classx) )
+        this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to button classes array */
+/** Create method for adding class to button classes */
 EZButton.prototype.addButtonClass = function (className) {
-  /** If the class doesn`t already exist in the button classes array, add it */
-  if ( !this.buttonClasses().includes(className) )
-    this.buttonClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._buttonClasses.split(' ').includes(classx) )
+        this._buttonClasses = this._buttonClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addButtonClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addButtonClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from column div classes array */
+/** Create method for removing class from column div classes */
 EZButton.prototype.removeColumnDivClass = function (className) {
-  /** Find index of class in column div classes array (if it exists) */
-  const index = this.columnDivClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from column div classes array */
-  if ( index !== -1 )
-    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._columnDivClasses.split(' ').includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeColumnDivClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from button classes array */
+/** Create method for removing class from button classes */
 EZButton.prototype.removeButtonClass = function (className) {
-  /** Find index of class in button classes array (if it exists) */
-  const index = this.buttonClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from button classes array */
-  if ( index !== -1 )
-    this.buttonClasses(this.buttonClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._buttonClasses.split(' ').includes(className) )
+      this._buttonClasses = this._buttonClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeButtonClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
@@ -84,7 +118,7 @@ EZButton.prototype.render = function (indent = 0) {
   columnDiv.addClass(`col-${this.cols()}`);
   
   /** Transfer column div classes to column div */
-  this.columnDivClasses().map(x => columnDiv.addClass(x));
+  this.columnDivClasses().split(` `).map(x => columnDiv.addClass(x));
 
   /** Create button element */
   const button = new ezhtml.Button();
@@ -97,7 +131,7 @@ EZButton.prototype.render = function (indent = 0) {
   button.content(this.content());
   
   /** Transfer button classes to button */
-  this.buttonClasses().map(x => button.addClass(x));
+  this.buttonClasses().split(` `).map(x => button.addClass(x));
   
   /** Transfer button properties to button */
   button.autofocus(this.autofocus());

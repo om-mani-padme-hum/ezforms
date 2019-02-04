@@ -13,8 +13,8 @@ const configEZHeading = {
     { name: `cols`, type: `int`, default: 16 },
     { name: `colsAfter`, type: `int` },
     { name: `colsBefore`, type: `int` },
-    { name: `columnDivClasses`, type: `array`, arrayOf: { type: `string` } },
-    { name: `headingClasses`, type: `array`, arrayOf: { type: `string` } },
+    { name: `columnDivClasses`, type: `string` },
+    { name: `headingClasses`, type: `string` },
     { name: `rank`, type: `int`, default: 1 },
     { name: `text`, type: `string` }
   ]
@@ -23,49 +23,83 @@ const configEZHeading = {
 /** Create EZHeading class */
 ezobjects.createClass(configEZHeading);
 
-/** Create method for adding class to column div classes array */
+/** Create method for adding class to column div classes */
 EZHeading.prototype.addColumnDivClass = function (className) {
-  /** If the class doesn`t already exist in the column div classes array, add it */
-  if ( !this.columnDivClasses().includes(className) )
-    this.columnDivClasses().push(className);
-  
-  /** Return this class for call chaining */
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._columnDivClasses.split(' ').includes(classx) )
+        this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addColumnDivClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for adding class to heading classes array */
-EZHeading.prototype.addHeadingClass = function (className) {
-  /** If the class doesn`t already exist in the heading classes array, add it */
-  if ( !this.headingClasses().includes(className) )
-    this.headingClasses().push(className);
-  
-  /** Return this class for call chaining */
+/** Create method for adding class to heading classes */
+EZButton.prototype.addHeadingClass = function (className) {
+  const classes = className.split(' ');
+
+  /** Add class to classes if it doesn't already exist */
+  classes.forEach((classx) => {
+    if ( typeof className == 'string' ) {
+      if ( !this._headingClasses.split(' ').includes(classx) )
+        this._headingClasses = this._headingClasses.concat(` ${classx}`).trim(); 
+    }
+
+    /** Handle errors */
+    else if ( className === null ) {
+      throw new TypeError(`${this.constructor.name}.addHeadingClass(null): Invalid signature.`);
+    } else {
+      throw new TypeError(`${this.constructor.name}.addHeadingClass(${className.constructor.name}): Invalid signature.`);
+    }
+  });
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from column div classes array */
+/** Create method for removing class from column div classes */
 EZHeading.prototype.removeColumnDivClass = function (className) {
-  /** Find index of class in column div classes array (if it exists) */
-  const index = this.columnDivClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from column div classes array */
-  if ( index !== -1 )
-    this.columnDivClasses(this.columnDivClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._columnDivClasses.split(' ').includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeColumnDivClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
-/** Create method for removing class from heading classes array */
+/** Create method for removing class from heading classes */
 EZHeading.prototype.removeHeadingClass = function (className) {
-  /** Find index of class in heading classes array (if it exists) */
-  const index = this.headingClasses().findIndex(x => x == className);
-  
-  /** If index exists, remove class from heading classes array */
-  if ( index !== -1 )
-    this.headingClasses(this.headingClasses().splice(index, 1));
-  
-  /** Return this class for call chaining */
+  /** Remove class from classes if it doesn't already exist */
+  if ( typeof className == 'string' ) {
+    if ( this._headingClasses.split(' ').includes(className) )
+      this._headingClasses = this._headingClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  }
+
+  /** Handle errors */
+  else {
+    throw new TypeError(`${this.constructor.name}.removeHeadingClass(): Invalid signature (${typeof className}).`);
+  }
+
+  /** Allow for call chaining */
   return this;
 };
 
@@ -86,7 +120,7 @@ EZHeading.prototype.render = function (indent = 0) {
   columnDiv.addClass(`col-${this.cols()}`);
   
   /** Transfer column div classes to column div */
-  this.columnDivClasses().map(x => columnDiv.addClass(x));
+  this.columnDivClasses().split(` `).map(x => columnDiv.addClass(x));
   
   /** Create heading */
   let heading = null;
@@ -105,7 +139,7 @@ EZHeading.prototype.render = function (indent = 0) {
     heading = new ezhtml.H6();
   
   /** Transfer heading classes to heading */
-  this.headingClasses().map(x => heading.addClass(x));
+  this.headingClasses().split(` `).map(x => heading.addClass(x));
   
   /** Transfer properties to heading */
   heading.text(this.text());
