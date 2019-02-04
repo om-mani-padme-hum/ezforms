@@ -30,7 +30,7 @@ const configEZRadioGroup = {
     { name: `formmethod`, type: `string` },
     { name: `formnovalidate`, type: `boolean` },
     { name: `formtarget`, type: `string` },
-    { name: `inputClasses`, `string` },
+    { name: `inputClasses`, type: `string` },
     { name: `label`, type: `string` },
     { name: `groupLabelClasses`, type: `string` },
     { name: `inputLabelClasses`, type: `string` },
