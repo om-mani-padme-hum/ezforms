@@ -3,7 +3,7 @@ const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
 /** Require local modules */
-const ezspace = require(`./ez-space`);;
+const ezspace = require(`./ez-space`);
 
 /** Configure EZHeading class */
 const configEZHeading = {
@@ -25,12 +25,12 @@ ezobjects.createClass(configEZHeading);
 
 /** Create method for adding class to column div classes */
 EZHeading.prototype.addColumnDivClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._columnDivClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._columnDivClasses.split(` `).includes(classx) )
         this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -48,12 +48,12 @@ EZHeading.prototype.addColumnDivClass = function (className) {
 
 /** Create method for adding class to heading classes */
 EZButton.prototype.addHeadingClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._headingClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._headingClasses.split(` `).includes(classx) )
         this._headingClasses = this._headingClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -71,10 +71,10 @@ EZButton.prototype.addHeadingClass = function (className) {
 
 /** Create method for removing class from column div classes */
 EZHeading.prototype.removeColumnDivClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._columnDivClasses.split(' ').includes(className) )
-      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._columnDivClasses.split(` `).includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -88,10 +88,10 @@ EZHeading.prototype.removeColumnDivClass = function (className) {
 
 /** Create method for removing class from heading classes */
 EZHeading.prototype.removeHeadingClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._headingClasses.split(' ').includes(className) )
-      this._headingClasses = this._headingClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._headingClasses.split(` `).includes(className) )
+      this._headingClasses = this._headingClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */

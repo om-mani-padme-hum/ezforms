@@ -3,7 +3,7 @@ const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
 /** Require local modules */
-const ezspace = require(`./ez-space`);;
+const ezspace = require(`./ez-space`);
 
 /** Configure EZRadioGroup class */
 const configEZRadioGroup = {
@@ -58,12 +58,12 @@ ezobjects.createClass(configEZRadioGroup);
 
 /** Create method for adding class to column div classes */
 EZRadioGroup.prototype.addColumnDivClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._columnDivClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._columnDivClasses.split(` `).includes(classx) )
         this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -81,12 +81,12 @@ EZRadioGroup.prototype.addColumnDivClass = function (className) {
 
 /** Create method for adding class to group div classes */
 EZRadioGroup.prototype.addGroupDivClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._groupDivClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._groupDivClasses.split(` `).includes(classx) )
         this._groupDivClasses = this._groupDivClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -104,12 +104,12 @@ EZRadioGroup.prototype.addGroupDivClass = function (className) {
 
 /** Create method for adding class to input div classes */
 EZRadioGroup.prototype.addInputDivClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._inputDivClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._inputDivClasses.split(` `).includes(classx) )
         this._inputDivClasses = this._inputDivClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -127,12 +127,12 @@ EZRadioGroup.prototype.addInputDivClass = function (className) {
 
 /** Create method for adding class to input classes */
 EZRadioGroup.prototype.addInputClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._inputClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._inputClasses.split(` `).includes(classx) )
         this._inputClasses = this._inputClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -150,12 +150,12 @@ EZRadioGroup.prototype.addInputClass = function (className) {
 
 /** Create method for adding class to group label classes */
 EZRadioGroup.prototype.addGroupLabelClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._groupLabelClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._groupLabelClasses.split(` `).includes(classx) )
         this._groupLabelClasses = this._groupLabelClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -173,12 +173,12 @@ EZRadioGroup.prototype.addGroupLabelClass = function (className) {
 
 /** Create method for adding class to label classes */
 EZRadioGroup.prototype.addInputLabelClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._inputLabelClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._inputLabelClasses.split(` `).includes(classx) )
         this._inputLabelClasses = this._inputLabelClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -196,10 +196,10 @@ EZRadioGroup.prototype.addInputLabelClass = function (className) {
 
 /** Create method for removing class from column div classes */
 EZRadioGroup.prototype.removeColumnDivClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._columnDivClasses.split(' ').includes(className) )
-      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._columnDivClasses.split(` `).includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -213,10 +213,10 @@ EZRadioGroup.prototype.removeColumnDivClass = function (className) {
 
 /** Create method for removing class from group div classes */
 EZRadioGroup.prototype.removeGroupDivClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._groupDivClasses.split(' ').includes(className) )
-      this._groupDivClasses = this._groupDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._groupDivClasses.split(` `).includes(className) )
+      this._groupDivClasses = this._groupDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -230,10 +230,10 @@ EZRadioGroup.prototype.removeGroupDivClass = function (className) {
 
 /** Create method for removing class from input div classes */
 EZRadioGroup.prototype.removeInputDivClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._inputDivClasses.split(' ').includes(className) )
-      this._inputDivClasses = this._inputDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._inputDivClasses.split(` `).includes(className) )
+      this._inputDivClasses = this._inputDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -248,10 +248,10 @@ EZRadioGroup.prototype.removeInputDivClass = function (className) {
 
 /** Create method for removing class from input classes */
 EZRadioGroup.prototype.removeInputClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._inputClasses.split(' ').includes(className) )
-      this._inputClasses = this._inputClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._inputClasses.split(` `).includes(className) )
+      this._inputClasses = this._inputClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -265,10 +265,10 @@ EZRadioGroup.prototype.removeInputClass = function (className) {
 
 /** Create method for removing class from group label classes */
 EZRadioGroup.prototype.removeGroupLabelClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._groupLabelClasses.split(' ').includes(className) )
-      this._groupLabelClasses = this._groupLabelClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._groupLabelClasses.split(` `).includes(className) )
+      this._groupLabelClasses = this._groupLabelClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -282,10 +282,10 @@ EZRadioGroup.prototype.removeGroupLabelClass = function (className) {
 
 /** Create method for removing class from input label classes */
 EZRadioGroup.prototype.removeInputLabelClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._inputLabelClasses.split(' ').includes(className) )
-      this._inputLabelClasses = this._inputLabelClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._inputLabelClasses.split(` `).includes(className) )
+      this._inputLabelClasses = this._inputLabelClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */

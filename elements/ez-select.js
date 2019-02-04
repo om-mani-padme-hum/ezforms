@@ -3,7 +3,7 @@ const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
 /** Require local modules */
-const ezspace = require(`./ez-space`);;
+const ezspace = require(`./ez-space`);
 
 /** Configure EZSelect class */
 const configEZSelect = {
@@ -34,12 +34,12 @@ ezobjects.createClass(configEZSelect);
 
 /** Create method for adding class to column div classes */
 EZSelect.prototype.addColumnDivClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._columnDivClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._columnDivClasses.split(` `).includes(classx) )
         this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -57,12 +57,12 @@ EZSelect.prototype.addColumnDivClass = function (className) {
 
 /** Create method for adding class to input classes */
 EZSelect.prototype.addInputClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._inputClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._inputClasses.split(` `).includes(classx) )
         this._inputClasses = this._inputClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -80,12 +80,12 @@ EZSelect.prototype.addInputClass = function (className) {
 
 /** Create method for adding class to label classes */
 EZSelect.prototype.addInputLabelClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
-  /** Add class to classes if it doesn't already exist */
+  /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._inputLabelClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._inputLabelClasses.split(` `).includes(classx) )
         this._inputLabelClasses = this._inputLabelClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -103,10 +103,10 @@ EZSelect.prototype.addInputLabelClass = function (className) {
 
 /** Create method for removing class from column div classes */
 EZSelect.prototype.removeColumnDivClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._columnDivClasses.split(' ').includes(className) )
-      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._columnDivClasses.split(` `).includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -120,10 +120,10 @@ EZSelect.prototype.removeColumnDivClass = function (className) {
 
 /** Create method for removing class from input classes */
 EZSelect.prototype.removeInputClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._inputClasses.split(' ').includes(className) )
-      this._inputClasses = this._inputClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._inputClasses.split(` `).includes(className) )
+      this._inputClasses = this._inputClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -137,10 +137,10 @@ EZSelect.prototype.removeInputClass = function (className) {
 
 /** Create method for removing class from input label classes */
 EZSelect.prototype.removeInputLabelClass = function (className) {
-  /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._inputLabelClasses.split(' ').includes(className) )
-      this._inputLabelClasses = this._inputLabelClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  /** Remove class from classes if it doesn`t already exist */
+  if ( typeof className == `string` ) {
+    if ( this._inputLabelClasses.split(` `).includes(className) )
+      this._inputLabelClasses = this._inputLabelClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */

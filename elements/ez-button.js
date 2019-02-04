@@ -3,7 +3,7 @@ const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
 
 /** Require local modules */
-const ezspace = require(`./ez-space`);;
+const ezspace = require(`./ez-space`);
 
 /** Configure EZButton class */
 const configEZButton = {
@@ -23,12 +23,12 @@ ezobjects.createClass(configEZButton);
 
 /** Create method for adding class to column div classes */
 EZButton.prototype.addColumnDivClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
   /** Add class to classes if it doesn't already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._columnDivClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._columnDivClasses.split(` `).includes(classx) )
         this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -46,12 +46,12 @@ EZButton.prototype.addColumnDivClass = function (className) {
 
 /** Create method for adding class to button classes */
 EZButton.prototype.addButtonClass = function (className) {
-  const classes = className.split(' ');
+  const classes = className.split(` `);
 
   /** Add class to classes if it doesn't already exist */
   classes.forEach((classx) => {
-    if ( typeof className == 'string' ) {
-      if ( !this._buttonClasses.split(' ').includes(classx) )
+    if ( typeof className == `string` ) {
+      if ( !this._buttonClasses.split(` `).includes(classx) )
         this._buttonClasses = this._buttonClasses.concat(` ${classx}`).trim(); 
     }
 
@@ -70,9 +70,9 @@ EZButton.prototype.addButtonClass = function (className) {
 /** Create method for removing class from column div classes */
 EZButton.prototype.removeColumnDivClass = function (className) {
   /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._columnDivClasses.split(' ').includes(className) )
-      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  if ( typeof className == `string` ) {
+    if ( this._columnDivClasses.split(` `).includes(className) )
+      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
@@ -87,9 +87,9 @@ EZButton.prototype.removeColumnDivClass = function (className) {
 /** Create method for removing class from button classes */
 EZButton.prototype.removeButtonClass = function (className) {
   /** Remove class from classes if it doesn't already exist */
-  if ( typeof className == 'string' ) {
-    if ( this._buttonClasses.split(' ').includes(className) )
-      this._buttonClasses = this._buttonClasses.replace(new RegExp(`\\b${className}\\b`, 'g'), ' ').replace(/[\s]+/, ' ').trim(); 
+  if ( typeof className == `string` ) {
+    if ( this._buttonClasses.split(` `).includes(className) )
+      this._buttonClasses = this._buttonClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
