@@ -126,17 +126,17 @@ EZHeading.prototype.render = function (indent = 0) {
   let heading = null;
   
   if ( this.rank() == 1 )
-    heading = new ezhtml.H1();
+    heading = new ezhtml.H1().addClass(`ezforms-h1`);
   else if ( this.rank() == 2 )
-    heading = new ezhtml.H2();
+    heading = new ezhtml.H2().addClass(`ezforms-h2`);
   else if ( this.rank() == 3 )
-    heading = new ezhtml.H3();
+    heading = new ezhtml.H3().addClass(`ezforms-h3`);
   else if ( this.rank() == 4 )
-    heading = new ezhtml.H4();
+    heading = new ezhtml.H4().addClass(`ezforms-h4`);
   else if ( this.rank() == 5 )
-    heading = new ezhtml.H5();
+    heading = new ezhtml.H5().addClass(`ezforms-h5`);
   else if ( this.rank() == 6 )
-    heading = new ezhtml.H6();
+    heading = new ezhtml.H6().addClass(`ezforms-h6`);
   
   /** Transfer heading classes to heading */
   this.headingClasses().split(` `).map(x => heading.addClass(x));

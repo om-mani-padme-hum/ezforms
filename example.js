@@ -17,15 +17,15 @@ app.get(`/`, (req, res) => {
   /** Create form heading (default 16 cols wide) */
   form.heading().rank(1).text(`My Example Form`);
   
-  form.alert().cols(16).type(`error`).strong(`Error!`).text(`Username or password invalid!`);
+  form.alert().cols(16).type(`success`).strong(`Error!`).text(`Username or password invalid!`);
   
   /** Create two text inputs, allowing only letters and quotes */
   form.text().cols(6).colsAfter(2).name(`firstName`).label(`First Name:`).required(true).pattern(`^[a-zA-Z&quot;]+$`);
-  form.text().cols(6).colsAfter(2).name(`lastName`).label(`Last Name:`).required(true).pattern(`^[a-zA-Z&quot;]+$`);
+  form.text().cols(6).name(`lastName`).label(`Last Name:`).required(true).pattern(`^[a-zA-Z&quot;]+$`);
 
   /** Create password inputs, requiring one uppercase letter, one lowercase letter, one number, at minimum 8 chars */
   form.password().cols(7).colsAfter(1).name(`password`).label(`Choose Password:`).required(true).pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}`);
-  form.password().cols(7).colsAfter(1).name(`password2`).label(`Confirm Password:`).required(true).pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}`);
+  form.password().cols(7).name(`password2`).label(`Confirm Password:`).required(true).pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}`);
   
   /** Create select pulldown input */
   form.select().cols(6).colsAfter(2).name(`favoritePetType`).label(`Favorite Pet Type:`);

@@ -4,7 +4,7 @@
   "description": "Easy HTML Form Rendering Using Node.js",
   "main": "index.js",
   "scripts": {
-    "start": "node example.js",
+    "start": "./make.sh",
     "test": "eslint index.js elements/ez-button.js elements/ez-checkbox-group.js elements/ez-heading.js elements/ez-input.js elements/ez-radio-group.js elements/ez-select.js elements/ez-space.js elements/ez-text-area.js elements/index.js"
   },
   "keywords": [
@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "ezhtml": "^1.4.3",
-    "ezobjects": "^5.4.4"
+    "ezobjects": "^5.4.4",
+    "octicons": "^8.5.0"
   },
   "devDependencies": {
     "ejs": "^2.6.1",

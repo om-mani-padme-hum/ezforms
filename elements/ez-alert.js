@@ -1,6 +1,7 @@
 /** Require external modules */
 const ezhtml = require(`ezhtml`);
 const ezobjects = require(`ezobjects`);
+const octicons = require(`octicons`);
 
 /** Require local modules */
 const ezspace = require(`./ez-space`);;
@@ -51,7 +52,22 @@ EZAlert.prototype.render = function (indent = 0) {
   else if ( this.type() == `info` )
     columnDiv.addClass(`alert-info`);
   
-  const strong = new ezhtml.Strong().text(this.strong() + `&nbsp;`);
+  /** Assume alert is error type, so use alert icon */
+  let icon = octicons.alert.toSVG({ width: 16 })
+  
+  /** If alert is warning type, use issue opened icon */
+  if ( this.type() == `warning` )
+    icon = octicons[`issue-opened`].toSVG({ width: 16 });
+  
+  /** Otherwise, if alert is success type, use check icon */
+  else if ( this.type() == `success` )
+    icon = octicons.check.toSVG({ width: 16 });
+  
+  /** Otherwise, if alert is info type, use question mark */
+  else if ( this.type() == `info` )
+    icon = octicons.question.toSVG({ width: 16 });
+  
+  const strong = new ezhtml.Strong().text(icon + `&nbsp;&nbsp;` + this.strong() + ` `);
   
   /** Append strong text to column div if it has length */
   if ( this.strong().length > 0 )

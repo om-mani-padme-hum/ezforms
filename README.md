@@ -1,4 +1,4 @@
-# EZ Forms v2.0.4
+# EZ Forms v2.1.0
 
 A super easy to use Node.js module for generating HTML 5 forms that can easily be customized with CSS using the default class names or your own.
 
@@ -108,6 +108,12 @@ app.listen(7000, () => {
   console.log(`Web server up and running on port 7000!`);
 });
 ```
+
+## Latest Changes
+
+* Improved flex sizing allows one to skip filling in all 16 cols with colsBefore/colsAfter when not all columns are used
+* Added heading classes so they are specific to ezforms headings instead of all headings in the document
+* Added octicons for the alerts, and improved warning alert CSS colors
 
 ## Todo
 
