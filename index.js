@@ -352,4 +352,5 @@ Form.prototype.week = function () {
 };
 
 /** Export class from module */
+module.exports.configForm = configForm;
 module.exports.Form = Form;
