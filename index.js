@@ -8,7 +8,8 @@ const elements = require(`./elements`);
 /** Configure class */
 const configForm = {
   className: `Form`,
-  extends: ezhtml.Form
+  extends: ezhtml.Form,
+  extendsConfig: ezhtml.configForm
 };
 
 /** Create class */

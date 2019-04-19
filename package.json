@@ -24,7 +24,7 @@
     "url": "https://github.com/om-mani-padme-hum/ezforms"
   },
   "dependencies": {
-    "ezhtml": "^1.4.3",
+    "ezhtml": "^1.5.0",
     "ezobjects": "^5.4.4",
     "octicons": "^8.5.0"
   },
