@@ -60,7 +60,7 @@ app.get(`/`, (req, res) => {
   form.number().cols(4).min(13).max(120).name(`age`).id(`age`).label(`Age:`).value(40);
   
   /** Create range input */
-  form.range().cols(6).min(13).max(120).id(`ageSlider`).label(`&nbsp;`).value(40).addColumnDivClass(`pad-me`);
+  form.range().cols(6).min(13).max(120).id(`ageSlider`).label(`&nbsp;`).value(40).addWrapperClass(`pad-me`);
   
   /** Create date input */
   form.date().cols(6).name(`birthDate`).label(`Birth Date:`);

@@ -14,29 +14,29 @@ const configEZButton = {
     { name: `cols`, type: `int`, default: 16 },
     { name: `colsAfter`, type: `int` },
     { name: `colsBefore`, type: `int` },
-    { name: `columnDivClasses`, type: `string` },
+    { name: `wrapperClasses`, type: `string` },
   ]
 };
 
 /** Create EZButton class */
 ezobjects.createClass(configEZButton);
 
-/** Create method for adding class to column div classes */
-EZButton.prototype.addColumnDivClass = function (className) {
+/** Create method for adding class to wrapper classes */
+EZButton.prototype.addWrapperClass = function (className) {
   const classes = className.split(` `);
 
   /** Add class to classes if it doesn't already exist */
   classes.forEach((classx) => {
     if ( typeof className == `string` ) {
-      if ( !this._columnDivClasses.split(` `).includes(classx) )
-        this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
+      if ( !this._wrapperClasses.split(` `).includes(classx) )
+        this._wrapperClasses = this._wrapperClasses.concat(` ${classx}`).trim(); 
     }
 
     /** Handle errors */
     else if ( className === null ) {
-      throw new TypeError(`${this.constructor.name}.addColumnDivClass(null): Invalid signature.`);
+      throw new TypeError(`${this.constructor.name}.addWrapperClass(null): Invalid signature.`);
     } else {
-      throw new TypeError(`${this.constructor.name}.addColumnDivClass(${className.constructor.name}): Invalid signature.`);
+      throw new TypeError(`${this.constructor.name}.addWrapperClass(${className.constructor.name}): Invalid signature.`);
     }
   });
 
@@ -67,17 +67,17 @@ EZButton.prototype.addButtonClass = function (className) {
   return this;
 };
 
-/** Create method for removing class from column div classes */
-EZButton.prototype.removeColumnDivClass = function (className) {
+/** Create method for removing class from wrapper classes */
+EZButton.prototype.removeWrapperClass = function (className) {
   /** Remove class from classes if it doesn't already exist */
   if ( typeof className == `string` ) {
-    if ( this._columnDivClasses.split(` `).includes(className) )
-      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
+    if ( this._wrapperClasses.split(` `).includes(className) )
+      this._wrapperClasses = this._wrapperClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
   else {
-    throw new TypeError(`${this.constructor.name}.removeColumnDivClass(): Invalid signature (${typeof className}).`);
+    throw new TypeError(`${this.constructor.name}.removeWrapperClass(): Invalid signature (${typeof className}).`);
   }
 
   /** Allow for call chaining */
@@ -111,14 +111,14 @@ EZButton.prototype.render = function (indent = 0) {
   if ( this.content().length == 0 )
     throw new ReferenceError(`EZButton.render(): Invalid button text, must not be blank.`);
   
-  /** Create column div */
-  const columnDiv = new ezhtml.Div();
+  /** Create wrapper */
+  const wrapper = new ezhtml.Div();
   
-  /** Set required cols class on column div */
-  columnDiv.addClass(`col-${this.cols()}`);
+  /** Set required cols class on wrapper */
+  wrapper.addClass(`col-${this.cols()}`);
   
-  /** Transfer column div classes to column div */
-  this.columnDivClasses().split(` `).map(x => columnDiv.addClass(x));
+  /** Transfer wrapper classes to wrapper */
+  this.wrapperClasses().split(` `).map(x => wrapper.addClass(x));
 
   /** Create button element */
   const button = new ezhtml.Button();
@@ -145,8 +145,8 @@ EZButton.prototype.render = function (indent = 0) {
   button.name(this.name());
   button.type(this.type());
     
-  /** Append button to column div */
-  columnDiv.append(button);
+  /** Append button to wrapper */
+  wrapper.append(button);
   
   let markup = ``;
   
@@ -155,7 +155,7 @@ EZButton.prototype.render = function (indent = 0) {
     markup += new ezspace.EZSpace().cols(this.colsBefore()).render(indent);
   
   /** Append input to markup */
-  markup += columnDiv.render(indent);
+  markup += wrapper.render(indent);
   
   /** If there are columns after, append space to markup */
   if ( this.colsAfter() > 0 )

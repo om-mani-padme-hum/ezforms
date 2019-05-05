@@ -13,7 +13,7 @@ const configEZHeading = {
     { name: `cols`, type: `int`, default: 16 },
     { name: `colsAfter`, type: `int` },
     { name: `colsBefore`, type: `int` },
-    { name: `columnDivClasses`, type: `string` },
+    { name: `wrapperClasses`, type: `string` },
     { name: `headingClasses`, type: `string` },
     { name: `rank`, type: `int`, default: 1 },
     { name: `text`, type: `string` }
@@ -23,22 +23,22 @@ const configEZHeading = {
 /** Create EZHeading class */
 ezobjects.createClass(configEZHeading);
 
-/** Create method for adding class to column div classes */
-EZHeading.prototype.addColumnDivClass = function (className) {
+/** Create method for adding class to wrapper classes */
+EZHeading.prototype.addWrapperClass = function (className) {
   const classes = className.split(` `);
 
   /** Add class to classes if it doesn`t already exist */
   classes.forEach((classx) => {
     if ( typeof className == `string` ) {
-      if ( !this._columnDivClasses.split(` `).includes(classx) )
-        this._columnDivClasses = this._columnDivClasses.concat(` ${classx}`).trim(); 
+      if ( !this._wrapperClasses.split(` `).includes(classx) )
+        this._wrapperClasses = this._wrapperClasses.concat(` ${classx}`).trim(); 
     }
 
     /** Handle errors */
     else if ( className === null ) {
-      throw new TypeError(`${this.constructor.name}.addColumnDivClass(null): Invalid signature.`);
+      throw new TypeError(`${this.constructor.name}.addWrapperClass(null): Invalid signature.`);
     } else {
-      throw new TypeError(`${this.constructor.name}.addColumnDivClass(${className.constructor.name}): Invalid signature.`);
+      throw new TypeError(`${this.constructor.name}.addWrapperClass(${className.constructor.name}): Invalid signature.`);
     }
   });
 
@@ -69,17 +69,17 @@ EZButton.prototype.addHeadingClass = function (className) {
   return this;
 };
 
-/** Create method for removing class from column div classes */
-EZHeading.prototype.removeColumnDivClass = function (className) {
+/** Create method for removing class from wrapper classes */
+EZHeading.prototype.removeWrapperClass = function (className) {
   /** Remove class from classes if it doesn`t already exist */
   if ( typeof className == `string` ) {
-    if ( this._columnDivClasses.split(` `).includes(className) )
-      this._columnDivClasses = this._columnDivClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
+    if ( this._wrapperClasses.split(` `).includes(className) )
+      this._wrapperClasses = this._wrapperClasses.replace(new RegExp(`\\b${className}\\b`, `g`), ` `).replace(/[\s]+/, ` `).trim(); 
   }
 
   /** Handle errors */
   else {
-    throw new TypeError(`${this.constructor.name}.removeColumnDivClass(): Invalid signature (${typeof className}).`);
+    throw new TypeError(`${this.constructor.name}.removeWrapperClass(): Invalid signature (${typeof className}).`);
   }
 
   /** Allow for call chaining */
@@ -113,14 +113,14 @@ EZHeading.prototype.render = function (indent = 0) {
   if ( this.rank() < 1 || this.rank() > 6 )
     throw new RangeError(`EZHeading.render(): Invalid number, rank must be between 1 and 6 inclusive.`);
   
-  /** Create column div */
-  const columnDiv = new ezhtml.Div();
+  /** Create wrapper */
+  const wrapper = new ezhtml.Div();
   
-  /** Set required cols class on column div */
-  columnDiv.addClass(`col-${this.cols()}`);
+  /** Set required cols class on wrapper */
+  wrapper.addClass(`col-${this.cols()}`);
   
-  /** Transfer column div classes to column div */
-  this.columnDivClasses().split(` `).map(x => columnDiv.addClass(x));
+  /** Transfer wrapper classes to wrapper */
+  this.wrapperClasses().split(` `).map(x => wrapper.addClass(x));
   
   /** Create heading */
   let heading = null;
@@ -144,8 +144,8 @@ EZHeading.prototype.render = function (indent = 0) {
   /** Transfer properties to heading */
   heading.text(this.text());
   
-  /** Append heading to column div */
-  columnDiv.append(heading);
+  /** Append heading to wrapper */
+  wrapper.append(heading);
   
   let markup = ``;
   
@@ -154,7 +154,7 @@ EZHeading.prototype.render = function (indent = 0) {
     markup += new ezspace.EZSpace().cols(this.colsBefore()).render(indent);
   
   /** Append input to markup */
-  markup += columnDiv.render(indent);
+  markup += wrapper.render(indent);
   
   /** If there are columns after, append space to markup */
   if ( this.colsAfter() > 0 )

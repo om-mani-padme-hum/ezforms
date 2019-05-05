@@ -37,20 +37,20 @@ EZAlert.prototype.render = function (indent = 0) {
   if ( ![`error`, `warning`, `info`, `success`].includes(this.type()) )
     throw new RangeError(`EZAlert.render(): Invalid alert type, must be error, warning, success, or info.`);
   
-  /** Create column div */
-  const columnDiv = new ezhtml.Div();
+  /** Create wrapper */
+  const wrapper = new ezhtml.Div();
   
-  /** Set required cols class on column div */
-  columnDiv.addClass(`col-${this.cols()}`);
+  /** Set required cols class on wrapper */
+  wrapper.addClass(`col-${this.cols()}`);
   
   if ( this.type() == `error` )
-    columnDiv.addClass(`alert-error`);
+    wrapper.addClass(`alert-error`);
   else if ( this.type() == `warning` )
-    columnDiv.addClass(`alert-warning`);
+    wrapper.addClass(`alert-warning`);
   else if ( this.type() == `success` )
-    columnDiv.addClass(`alert-success`);
+    wrapper.addClass(`alert-success`);
   else if ( this.type() == `info` )
-    columnDiv.addClass(`alert-info`);
+    wrapper.addClass(`alert-info`);
   
   /** Assume alert is error type, so use alert icon */
   let icon = octicons.alert.toSVG({ width: 16 })
@@ -69,12 +69,12 @@ EZAlert.prototype.render = function (indent = 0) {
   
   const strong = new ezhtml.Strong().text(icon + `&nbsp;&nbsp;` + this.strong() + ` `);
   
-  /** Append strong text to column div if it has length */
+  /** Append strong text to wrapper if it has length */
   if ( this.strong().length > 0 )
-    columnDiv.append(strong);
+    wrapper.append(strong);
   
-  /** Append remaining text to column div */
-  columnDiv.text(this.text());
+  /** Append remaining text to wrapper */
+  wrapper.text(this.text());
   
   let markup = ``;
   
@@ -83,7 +83,7 @@ EZAlert.prototype.render = function (indent = 0) {
     markup += new ezspace.EZSpace().cols(this.colsBefore()).render(indent);
   
   /** Append input to markup */
-  markup += columnDiv.render(indent);
+  markup += wrapper.render(indent);
   
   /** If there are columns after, append space to markup */
   if ( this.colsAfter() > 0 )
